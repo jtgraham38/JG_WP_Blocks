@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "jg-blocks/hero-slideshow",
+	"version": "0.1.0",
+	"title": "Hero Slideshow",
+	"keywords": [
+		"hero",
+		"slideshow"
+	],
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "A slideshow to serve as the hero banner element for a site..",
+	"example": {},
+	"attributes": {
+		"slides": {
+			"type": "array",
+			"default": []
+		}
+	},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "hero-slideshow",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}
