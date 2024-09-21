@@ -15,10 +15,14 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {Element} Element to render.
  */
-export default function save() {
+export default function save(
+	{ attributes }
+) {
 	return (
 		<p { ...useBlockProps.save() }>
-			{ 'Hero Slideshow – hello from the saved content!' }
+			<pre>
+				{ JSON.stringify( attributes, null, 2 ) }
+			</pre>
 		</p>
 	);
 }

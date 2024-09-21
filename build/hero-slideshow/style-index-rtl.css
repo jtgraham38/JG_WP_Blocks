@@ -7,8 +7,20 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.wp-block-create-block-hero-slideshow {
-  background-color: #21759b;
-  color: #fff;
-  padding: 2px;
+.jg_blocks-hero_slideshow {
+  width: 100%;
+  height: 100vh;
+}
+.jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_slide {
+  width: 100%;
+  height: 100%;
+}
+.jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_slide.jg_blocks-hidden {
+  display: none;
+}
+.jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_slide .jg_blocks-hero_slideshow_image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }

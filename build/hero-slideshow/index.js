@@ -65,47 +65,68 @@ function Edit({
   setAttributes,
   isSelected
 }) {
-  // Function to handle the media selection
+  //state var for which slide is selected
+  const [selectedSlide, setSelectedSlide] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(0);
+
+  // function to handle the media selection
   const onSelectMedia = media => {
     //construct media array
-    const new_media = [];
+    const slides = [];
     media.map(media => {
       media = {
         id: media.id,
         url: media.url,
         alt: media.alt
       };
-      new_media.push(media);
+      slides.push(media);
     });
     setAttributes({
-      media: new_media
+      slides: slides
     });
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)(),
+    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
+      className: 'jg_blocks-hero_slideshow'
+    }),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUploadCheck, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
         onSelect: onSelectMedia,
         allowedTypes: ['image'],
-        value: media ? media.map(item => item.id) : [],
+        value: attributes?.slides ? attributes?.slides.map(slide => slide.id) : [],
         multiple: true,
         gallery: true,
         render: ({
           open
         }) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
           onClick: open,
-          children: media && media.length > 0 ? media.map((item, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-            src: item.url,
-            alt: item.alt,
-            style: {
-              width: '100px',
-              marginRight: '10px'
-            }
-          }, index)) : 'Select Images'
+          children: attributes?.slides && attributes?.slides?.length > 0 ? '' : 'Select Images'
         })
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("pre", {
-      children: JSON.stringify(attributes.media, null, 2)
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+      onClick: () => {
+        if (selectedSlide > 0) {
+          setSelectedSlide(selectedSlide - 1);
+        }
+      },
+      children: "<"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
+      children: [selectedSlide + 1, " / ", attributes?.slides?.length]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+      onClick: () => {
+        if (selectedSlide < attributes?.slides?.length - 1) {
+          setSelectedSlide(selectedSlide + 1);
+        }
+      },
+      children: ">"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), attributes?.slides && attributes?.slides?.length > 0 ? attributes?.slides.map((slide, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: `jg_blocks-hero_slideshow_slide ${selectedSlide == index ? '' : 'jg_blocks-hidden'}`,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+        className: "jg_blocks-hero_slideshow_slide",
+        src: slide.url,
+        alt: slide.alt
+      })
+    }, index)) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+      children: "Add Images to the Slide Show"
     })]
   });
 }
@@ -198,10 +219,14 @@ __webpack_require__.r(__webpack_exports__);
  * @return {Element} Element to render.
  */
 
-function save() {
+function save({
+  attributes
+}) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save(),
-    children: 'Hero Slideshow – hello from the saved content!'
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("pre", {
+      children: JSON.stringify(attributes, null, 2)
+    })
   });
 }
 
@@ -297,7 +322,7 @@ module.exports = window["wp"]["i18n"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow"],"category":"widgets","icon":"smiley","description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[]}},"supports":{"html":false},"textdomain":"hero-slideshow","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner"],"category":"widgets","icon":"smiley","description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[]}},"supports":{"html":false},"textdomain":"hero-slideshow","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

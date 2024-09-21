@@ -40,54 +40,102 @@ export default function Edit(
 	{ attributes, setAttributes, isSelected }
 ) {
 
+	//state var for which slide is selected
+	const [selectedSlide, setSelectedSlide] = useState(0);
 
-	// Function to handle the media selection
+	// function to handle the media selection
     const onSelectMedia = (media) => {
 
 		//construct media array
-		const new_media = [];
+		const slides = [];
 		media.map((media) => {
 			media = {
 				id: media.id,
 				url: media.url,
 				alt: media.alt,
 			};
-			new_media.push(media);
+			slides.push(media);
 		});
 
-
 		setAttributes({
-			media: new_media,
+			slides: slides,
 		});
     };
 
+	
+
 	return (
-		<div { ...useBlockProps() }>
+		<div { ...useBlockProps({
+			className: 'jg_blocks-hero_slideshow'
+		}) }>
 			<MediaUploadCheck>
 				<MediaUpload
 					onSelect={onSelectMedia}
 					allowedTypes={['image']}
-					value={media ? media.map((item) => item.id) : []}
+					value={attributes?.slides ? attributes?.slides.map((slide) => slide.id) : []}
 					multiple
 					gallery
 					render={({ open }) => (
 						<Button onClick={open}>
-							{media && media.length > 0 ? (
-                                media.map((item, index) => (
-                                    <img key={index} src={item.url} alt={item.alt} style={{ width: '100px', marginRight: '10px' }} />
-                                ))
-                            ) : (
-                                'Select Images'
-                            )}
+							{
+								attributes?.slides && attributes?.slides?.length > 0 ?
+								'' 
+								: 
+								(
+									'Select Images'
+								)
+							}
 						</Button>
 					)}
 				/>
 			</MediaUploadCheck>
-			<br />
+			<br/>
 
-			<pre>
-				{JSON.stringify(attributes.media, null, 2)}
-			</pre>
+			<button
+				onClick={() => {
+					if(selectedSlide > 0) {
+						setSelectedSlide(selectedSlide - 1);
+					}
+				}}
+			>
+				&lt;
+			</button>
+			<span>{ selectedSlide + 1 } / { attributes?.slides?.length }</span>
+			<button
+				onClick={() => {
+					if(selectedSlide < attributes?.slides?.length - 1) {
+						setSelectedSlide(selectedSlide + 1);
+					}
+				}}
+			>
+				&gt;
+			</button>
+
+			<br/>
+
+			{
+				attributes?.slides && attributes?.slides?.length > 0 ? (
+					attributes?.slides.map((slide, index) => (
+						<div
+							className={`jg_blocks-hero_slideshow_slide ${selectedSlide == index ? '' : 'jg_blocks-hidden'}`}
+							key={index}
+						>
+							<img 
+								className='jg_blocks-hero_slideshow_slide'
+								src={slide.url}
+								alt={slide.alt} 
+							/>
+							{/* <pre>
+								{
+									JSON.stringify(slide, null, 2)
+								}
+							</pre> */}
+						</div>
+					))
+				) : (
+					<span>Add Images to the Slide Show</span>
+				)
+			}
 		</div>
 	);
 }
