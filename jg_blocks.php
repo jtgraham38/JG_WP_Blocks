@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name:       Hero Slideshow
- * Description:       Example block scaffolded with Create Block tool.
+ * Plugin Name:       JG Blocks
+ * Description:       Custom blocks developed for JG Web Development
  * Requires at least: 6.6
  * Requires PHP:      7.2
  * Version:           0.1.0
  * Author:            The WordPress Contributors
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       hero-slideshow
+ * Text Domain:       jg-blocks
  *
  * @package CreateBlock
  */
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function create_block_hero_slideshow_block_init() {
+function init_jg_blocks() {
 	register_block_type( __DIR__ . '/build/hero-slideshow' );
 }
-add_action( 'init', 'create_block_hero_slideshow_block_init' );
+add_action( 'init', 'init_jg_blocks' );
