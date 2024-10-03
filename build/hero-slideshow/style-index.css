@@ -10,6 +10,31 @@
 .jg_blocks-hero_slideshow {
   width: 100%;
   height: 100vh;
+  position: relative;
+}
+.jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+.jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_controls .jg_blocks-hero_slideshow_control {
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem;
+  align-self: center;
+  font-size: larger;
+}
+.jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_controls .jg_blocks-hero_slideshow_action_button {
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 1rem;
+  align-self: center;
+  text-align: center;
+  font-size: larger;
+  display: inline-block;
 }
 .jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_slide {
   width: 100%;

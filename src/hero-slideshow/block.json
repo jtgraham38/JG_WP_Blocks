@@ -16,11 +16,57 @@
 	"attributes": {
 		"slides": {
 			"type": "array",
-			"default": []
-		}
+			"default": [],
+			"items": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "number",
+						"default": ""
+					},
+					"url": {
+						"type": "string",
+						"default": ""
+					},
+					"alt": {
+						"type": "string",
+						"default": ""
+					},
+					"content":{
+						"type": "object",
+						"properties": {
+							"title": {
+								"type": "string",
+								"default": ""
+							},
+							"text": {
+								"type": "string",
+								"default": ""
+							},
+							"buttonText": {
+								"type": "string",
+								"default": ""
+							}
+						}
+					}
+				}
+			}
+		},
+		"backgroundColor": {
+            "type": "string",
+            "default": "#ffffff"
+        },
+        "textColor": {
+            "type": "string",
+            "default": "#000000"
+        }
 	},
 	"supports": {
-		"html": false
+		"html": false,
+		"color": {
+			"background": true,
+			"text": true
+		}
 	},
 	"textdomain": "jg-blocks",
 	"editorScript": "file:./index.js",

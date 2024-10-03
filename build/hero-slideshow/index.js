@@ -51,6 +51,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -85,9 +86,7 @@ function Edit({
     });
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-    ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-      className: 'jg_blocks-hero_slideshow'
-    }),
+    className: "jg_blocks-hero_slideshow",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUploadCheck, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
         onSelect: onSelectMedia,
@@ -102,22 +101,79 @@ function Edit({
           children: attributes?.slides && attributes?.slides?.length > 0 ? '' : 'Select Images'
         })
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-      onClick: () => {
-        if (selectedSlide > 0) {
-          setSelectedSlide(selectedSlide - 1);
-        }
-      },
-      children: "<"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
-      children: [selectedSlide + 1, " / ", attributes?.slides?.length]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-      onClick: () => {
-        if (selectedSlide < attributes?.slides?.length - 1) {
-          setSelectedSlide(selectedSlide + 1);
-        }
-      },
-      children: ">"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "jg_blocks-hero_slideshow_controls",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
+          className: "jg_blocks-hero_slideshow_control"
+        }),
+        onClick: () => {
+          if (selectedSlide > 0) {
+            setSelectedSlide(selectedSlide - 1);
+          }
+        },
+        children: "\u2190"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
+          tagName: "span",
+          className: "jg_blocks-hero_slideshow_title",
+          value: attributes?.slides[selectedSlide]?.content?.title || "Slide Title",
+          onChange: value => {
+            const newSlides = [...attributes.slides];
+            if (!newSlides[selectedSlide].content) {
+              newSlides[selectedSlide].content = {};
+            }
+            newSlides[selectedSlide].content.title = value;
+            setAttributes({
+              slides: newSlides
+            });
+          },
+          placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide Title", "hero-slideshow")
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
+          tagName: "p",
+          className: "jg_blocks-hero_slideshow_text",
+          value: attributes?.slides[selectedSlide]?.content?.text || "Put some descriptive slide text here.",
+          onChange: value => {
+            const newSlides = [...attributes.slides];
+            if (!newSlides[selectedSlide].content) {
+              newSlides[selectedSlide].content = {};
+            }
+            newSlides[selectedSlide].content.text = value;
+            setAttributes({
+              slides: newSlides
+            });
+          },
+          placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Put some descriptive slide text here.", "hero-slideshow")
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          style: {
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%"
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+            ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
+              className: "jg_blocks-hero_slideshow_action_button"
+            }),
+            children: attributes?.slides[selectedSlide]?.content?.buttonText || "Go!"
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
+        style: {
+          display: "none"
+        },
+        children: [selectedSlide + 1, " / ", attributes?.slides?.length]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
+          className: "jg_blocks-hero_slideshow_control"
+        }),
+        onClick: () => {
+          if (selectedSlide < attributes?.slides?.length - 1) {
+            setSelectedSlide(selectedSlide + 1);
+          }
+        },
+        children: "\u2192"
+      })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), attributes?.slides && attributes?.slides?.length > 0 ? attributes?.slides.map((slide, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: `jg_blocks-hero_slideshow_slide ${selectedSlide == index ? '' : 'jg_blocks-hidden'}`,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
@@ -322,7 +378,7 @@ module.exports = window["wp"]["i18n"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner"],"category":"widgets","icon":"smiley","description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[]}},"supports":{"html":false},"textdomain":"jg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner"],"category":"widgets","icon":"smiley","description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number","default":""},"url":{"type":"string","default":""},"alt":{"type":"string","default":""},"content":{"type":"object","properties":{"title":{"type":"string","default":""},"text":{"type":"string","default":""},"buttonText":{"type":"string","default":""}}}}}},"backgroundColor":{"type":"string","default":"#ffffff"},"textColor":{"type":"string","default":"#000000"}},"supports":{"html":false,"color":{"background":true,"text":true}},"textdomain":"jg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

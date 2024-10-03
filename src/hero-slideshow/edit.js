@@ -25,6 +25,7 @@ import './editor.scss';
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
 import { useState } from '@wordpress/element';
+import { RichText } from '@wordpress/block-editor';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -65,9 +66,7 @@ export default function Edit(
 	
 
 	return (
-		<div { ...useBlockProps({
-			className: 'jg_blocks-hero_slideshow'
-		}) }>
+		<div className='jg_blocks-hero_slideshow'>
 			<MediaUploadCheck>
 				<MediaUpload
 					onSelect={onSelectMedia}
@@ -91,25 +90,79 @@ export default function Edit(
 			</MediaUploadCheck>
 			<br/>
 
-			<button
-				onClick={() => {
-					if(selectedSlide > 0) {
-						setSelectedSlide(selectedSlide - 1);
-					}
-				}}
-			>
-				&lt;
-			</button>
-			<span>{ selectedSlide + 1 } / { attributes?.slides?.length }</span>
-			<button
-				onClick={() => {
-					if(selectedSlide < attributes?.slides?.length - 1) {
-						setSelectedSlide(selectedSlide + 1);
-					}
-				}}
-			>
-				&gt;
-			</button>
+			<div className="jg_blocks-hero_slideshow_controls">
+				<div
+					{...useBlockProps(
+						{
+							className: "jg_blocks-hero_slideshow_control"
+						}
+					)}
+					onClick={() => {
+						if(selectedSlide > 0) {
+							setSelectedSlide(selectedSlide - 1);
+						}
+					}}
+				>
+					←
+				</div>
+
+				<div>
+					<RichText
+						tagName="span"
+						className="jg_blocks-hero_slideshow_title"
+						value={attributes?.slides[selectedSlide]?.content?.title || "Slide Title"}
+						onChange={(value) => {
+							const newSlides = [...attributes.slides];
+							if (!newSlides[selectedSlide].content) {
+								newSlides[selectedSlide].content = {};
+							}
+							newSlides[selectedSlide].content.title = value;
+							setAttributes({ slides: newSlides });
+						}}
+						placeholder={__("Slide Title", "hero-slideshow")}
+					/>
+					
+					<RichText
+						tagName="p"
+						className="jg_blocks-hero_slideshow_text"
+						value={attributes?.slides[selectedSlide]?.content?.text || "Put some descriptive slide text here."}
+						onChange={(value) => {
+							const newSlides = [...attributes.slides];
+							if (!newSlides[selectedSlide].content) {
+								newSlides[selectedSlide].content = {};
+							}
+							newSlides[selectedSlide].content.text = value;
+							setAttributes({ slides: newSlides });
+						}}
+						placeholder={__("Put some descriptive slide text here.", "hero-slideshow")}
+					/>
+
+					<div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+						<div {...useBlockProps(
+							{ className: "jg_blocks-hero_slideshow_action_button" }
+						)}>
+							{ attributes?.slides[selectedSlide]?.content?.buttonText || "Go!" }
+						</div>
+					</div>
+				</div>
+
+				<span style={{ display: "none" }} >{ selectedSlide + 1 } / { attributes?.slides?.length }</span>
+				<div
+					{...useBlockProps(
+						{
+							className: "jg_blocks-hero_slideshow_control"
+						}
+					)}
+					onClick={() => {
+						if(selectedSlide < attributes?.slides?.length - 1) {
+							setSelectedSlide(selectedSlide + 1);
+						}
+					}}
+				>
+					→
+				</div>
+			</div>
+
 
 			<br/>
 
