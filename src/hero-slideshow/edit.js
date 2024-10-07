@@ -48,8 +48,8 @@ export default function Edit(
 	wrapperProps.style.height = attributes?.height || '32rem';
 
 	//extract button styles
-	const buttonBg = attributes?.style?.elements?.button?.background || '#000000';
-	const buttonText = attributes?.style?.elements?.button?.text || '#ffffff';
+	const buttonBg = attributes?.style?.elements?.button?.color.background || '#000000';
+	const buttonText = attributes?.style?.elements?.button?.color.text || '#ffffff';
 	const buttonProps = {
 		className: '',
 		style: {
@@ -58,18 +58,21 @@ export default function Edit(
 		}
 	};
 
-	//handle preset bg color
-	if(buttonBg.includes('var:preset|color|')) {
-		buttonProps.style.background = '';
-		buttonProps.className += 'has-background';
-		buttonProps.className += 'has-' + buttonBg.match(/var:preset|color|(\w+)/)[1] + "-background-color";
+	//handle preset text color
+	const textMatches = buttonText.match(/var:preset\|color\|([\w-]+)/);
+	if(textMatches && textMatches.length > 0) {
+		buttonProps.style.color = '';
+		buttonProps.className += ' has-color';
+		buttonProps.className += ' has-' + textMatches[1] + "-color";
 	}
 
-	//handle preset text color
-	if(buttonText.includes('var:preset|color|')) {
-		buttonProps.style.color = '';
-		buttonProps.className += 'has-color';
-		buttonProps.className += 'has-' + buttonText.match(/var:preset|color|(\w+)/)[1] + "-color";
+	//handle preset background color
+	const bgMatches = buttonBg.match(/var:preset\|color\|([\w-]+)/);
+	console.log("bgMatches", bgMatches);
+	if (bgMatches && bgMatches.length > 0) {
+		buttonProps.style.background = '';
+		buttonProps.className += ' has-background';
+		buttonProps.className += ' has-' + bgMatches[1] + "-background-color";
 	}
 
 	//create action button props
@@ -85,11 +88,9 @@ export default function Edit(
 	arrowBtnProps.className += ' jg_blocks-hero_slideshow_control';
 
 	console.log("------")
-	console.log(buttonText)	
-	console.log(buttonBg)
-	console.log(attributes);
-	console.log(actionBtnProps);
-	console.log(arrowBtnProps);
+	console.log("attributes", attributes);
+	console.log()
+	
 
 	//state var for which slide is selected
 	const [selectedSlide, setSelectedSlide] = useState(0);
