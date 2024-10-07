@@ -54,15 +54,19 @@
 		},
         "textColor": {
             "type": "string",
-            "default": "#000000"
+            "default": "#ffffff"
         },
+		"fontSize": {
+			"type": "string",
+			"default": "x-large"
+		},
 		"style": {
 			"type": "object",
 			"default": {
 				"elements": {
 					"button": {
 						"color": {
-							"text": "var:preset|color|contrast",
+							"text": "#ffffff",
 							"background": "#000000"
 						}
 					}

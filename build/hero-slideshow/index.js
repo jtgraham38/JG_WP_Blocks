@@ -96,7 +96,6 @@ function Edit({
 
   //handle preset background color
   const bgMatches = buttonBg.match(/var:preset\|color\|([\w-]+)/);
-  console.log("bgMatches", bgMatches);
   if (bgMatches && bgMatches.length > 0) {
     buttonProps.style.background = '';
     buttonProps.className += ' has-background';
@@ -114,9 +113,6 @@ function Edit({
     ...buttonProps
   };
   arrowBtnProps.className += ' jg_blocks-hero_slideshow_control';
-  console.log("------");
-  console.log("attributes", attributes);
-  console.log();
 
   //state var for which slide is selected
   const [selectedSlide, setSelectedSlide] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(0);
@@ -445,7 +441,7 @@ module.exports = window["wp"]["i18n"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner"],"category":"widgets","icon":"smiley","description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number","default":""},"url":{"type":"string","default":""},"alt":{"type":"string","default":""},"content":{"type":"object","properties":{"caption":{"type":"string","default":""},"buttonText":{"type":"string","default":""}}}}}},"height":{"type":"string","default":"32rem"},"textColor":{"type":"string","default":"#000000"},"style":{"type":"object","default":{"elements":{"button":{"color":{"text":"var:preset|color|contrast","background":"#000000"}}}}}},"supports":{"html":false,"color":{"text":true,"background":false,"button":true},"typography":{"fontSize":true}},"textdomain":"jg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner"],"category":"widgets","icon":"smiley","description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number","default":""},"url":{"type":"string","default":""},"alt":{"type":"string","default":""},"content":{"type":"object","properties":{"caption":{"type":"string","default":""},"buttonText":{"type":"string","default":""}}}}}},"height":{"type":"string","default":"32rem"},"textColor":{"type":"string","default":"#ffffff"},"fontSize":{"type":"string","default":"x-large"},"style":{"type":"object","default":{"elements":{"button":{"color":{"text":"#ffffff","background":"#000000"}}}}}},"supports":{"html":false,"color":{"text":true,"background":false,"button":true},"typography":{"fontSize":true}},"textdomain":"jg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

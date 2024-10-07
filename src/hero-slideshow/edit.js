@@ -68,7 +68,6 @@ export default function Edit(
 
 	//handle preset background color
 	const bgMatches = buttonBg.match(/var:preset\|color\|([\w-]+)/);
-	console.log("bgMatches", bgMatches);
 	if (bgMatches && bgMatches.length > 0) {
 		buttonProps.style.background = '';
 		buttonProps.className += ' has-background';
@@ -86,11 +85,6 @@ export default function Edit(
 		...buttonProps
 	}
 	arrowBtnProps.className += ' jg_blocks-hero_slideshow_control';
-
-	console.log("------")
-	console.log("attributes", attributes);
-	console.log()
-	
 
 	//state var for which slide is selected
 	const [selectedSlide, setSelectedSlide] = useState(0);
