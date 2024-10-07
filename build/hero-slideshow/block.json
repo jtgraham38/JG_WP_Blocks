@@ -59,6 +59,10 @@
     "textColor": {
       "type": "string",
       "default": "#000000"
+    },
+    "height": {
+      "type": "string",
+      "default": "32rem;"
     }
   },
   "supports": {
