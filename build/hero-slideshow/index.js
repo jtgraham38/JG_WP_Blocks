@@ -72,19 +72,51 @@ function Edit({
   const wrapperProps = {
     ...blockProps
   };
-  wrapperProps.className = wrapperProps.className.split(' ').filter(className => {
-    return !className.startsWith('has-') && !className.startsWith('is-');
-  }).join(' ');
   wrapperProps.className += ' jg_blocks-hero_slideshow';
-  wrapperProps.style = {};
   wrapperProps.style.height = attributes?.height || '32rem';
 
   //extract button styles
-  const buttonStyles = {
-    color: attributes?.style?.elements?.button?.text || '#ffffff',
-    backgroundColor: attributes?.style?.elements?.button?.background || '#000000'
+  const buttonBg = attributes?.style?.elements?.button?.background || '#000000';
+  const buttonText = attributes?.style?.elements?.button?.text || '#ffffff';
+  const buttonProps = {
+    className: '',
+    style: {
+      background: buttonBg,
+      color: buttonText
+    }
   };
-  console.log(blockProps);
+
+  //handle preset bg color
+  if (buttonBg.includes('var:preset|color|')) {
+    buttonProps.style.background = '';
+    buttonProps.className += 'has-background';
+    buttonProps.className += 'has-' + buttonBg.match(/var:preset|color|(\w+)/)[1] + "-background-color";
+  }
+
+  //handle preset text color
+  if (buttonText.includes('var:preset|color|')) {
+    buttonProps.style.color = '';
+    buttonProps.className += 'has-color';
+    buttonProps.className += 'has-' + buttonText.match(/var:preset|color|(\w+)/)[1] + "-color";
+  }
+
+  //create action button props
+  const actionBtnProps = {
+    ...buttonProps
+  };
+  actionBtnProps.className += ' jg_blocks-hero_slideshow_action_button';
+
+  //create arrow button props
+  const arrowBtnProps = {
+    ...buttonProps
+  };
+  arrowBtnProps.className += ' jg_blocks-hero_slideshow_control';
+  console.log("------");
+  console.log(buttonText);
+  console.log(buttonBg);
+  console.log(attributes);
+  console.log(actionBtnProps);
+  console.log(arrowBtnProps);
 
   //state var for which slide is selected
   const [selectedSlide, setSelectedSlide] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(0);
@@ -163,43 +195,27 @@ function Edit({
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "jg_blocks-hero_slideshow_controls",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-          className: "jg_blocks-hero_slideshow_control",
-          style: buttonStyles,
+          ...arrowBtnProps,
           onClick: () => {
             setSelectedSlide(selectedSlide - 1 >= 0 ? selectedSlide - 1 : attributes?.slides.length - 1);
           },
           children: "\u2190"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
-            tagName: "span",
-            className: "jg_blocks-hero_slideshow_title",
-            value: attributes?.slides[selectedSlide]?.content?.title || "Slide Title",
-            onChange: value => {
-              const newSlides = [...attributes.slides];
-              if (!newSlides[selectedSlide].content) {
-                newSlides[selectedSlide].content = {};
-              }
-              newSlides[selectedSlide].content.title = value;
-              setAttributes({
-                slides: newSlides
-              });
-            },
-            placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide Title", "hero-slideshow")
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
             tagName: "p",
             className: "jg_blocks-hero_slideshow_text",
-            value: attributes?.slides[selectedSlide]?.content?.text || "Put some descriptive slide text here.",
+            value: attributes?.slides[selectedSlide]?.content?.caption || "Put a descriptive slide caption here.",
             onChange: value => {
               const newSlides = [...attributes.slides];
               if (!newSlides[selectedSlide].content) {
                 newSlides[selectedSlide].content = {};
               }
-              newSlides[selectedSlide].content.text = value;
+              newSlides[selectedSlide].content.caption = value;
               setAttributes({
                 slides: newSlides
               });
             },
-            placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Put some descriptive slide text here.", "hero-slideshow")
+            placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Put a descriptive slide caption here.", "hero-slideshow")
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             style: {
               display: "flex",
@@ -208,8 +224,7 @@ function Edit({
               width: "100%"
             },
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-              className: "jg_blocks-hero_slideshow_action_button",
-              style: buttonStyles,
+              ...actionBtnProps,
               children: attributes?.slides[selectedSlide]?.content?.buttonText || "Go!"
             })
           })]
@@ -219,8 +234,7 @@ function Edit({
           },
           children: [selectedSlide + 1, " / ", attributes?.slides?.length]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-          className: "jg_blocks-hero_slideshow_control",
-          style: buttonStyles,
+          ...arrowBtnProps,
           onClick: () => {
             setSelectedSlide(selectedSlide + 1 < attributes?.slides.length ? selectedSlide + 1 : 0);
           },
@@ -431,7 +445,7 @@ module.exports = window["wp"]["i18n"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner"],"category":"widgets","icon":"smiley","description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number","default":""},"url":{"type":"string","default":""},"alt":{"type":"string","default":""},"content":{"type":"object","properties":{"title":{"type":"string","default":""},"text":{"type":"string","default":""},"buttonText":{"type":"string","default":""}}}}}},"height":{"type":"string","default":"32rem"},"textColor":{"type":"string","default":"#000000"},"style":{"type":"object","default":{"elements":{"button":{"color":{"text":"var:preset|color|contrast","background":"#000000"}}}}}},"supports":{"html":false,"color":{"text":true,"background":false,"button":true}},"textdomain":"jg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner"],"category":"widgets","icon":"smiley","description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number","default":""},"url":{"type":"string","default":""},"alt":{"type":"string","default":""},"content":{"type":"object","properties":{"caption":{"type":"string","default":""},"buttonText":{"type":"string","default":""}}}}}},"height":{"type":"string","default":"32rem"},"textColor":{"type":"string","default":"#000000"},"style":{"type":"object","default":{"elements":{"button":{"color":{"text":"var:preset|color|contrast","background":"#000000"}}}}}},"supports":{"html":false,"color":{"text":true,"background":false,"button":true},"typography":{"fontSize":true}},"textdomain":"jg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

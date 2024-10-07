@@ -35,11 +35,7 @@
           "content": {
             "type": "object",
             "properties": {
-              "title": {
-                "type": "string",
-                "default": ""
-              },
-              "text": {
+              "caption": {
                 "type": "string",
                 "default": ""
               },
@@ -80,6 +76,9 @@
       "text": true,
       "background": false,
       "button": true
+    },
+    "typography": {
+      "fontSize": true
     }
   },
   "textdomain": "jg-blocks",

@@ -44,19 +44,52 @@ export default function Edit(
 
 	//get all the non-style related block props for the wrapper
 	const wrapperProps = {...blockProps};
-	wrapperProps.className = wrapperProps.className.split(' ').filter( (className) => {
-		return !className.startsWith('has-') && !className.startsWith('is-');
-	}).join(' ');
 	wrapperProps.className += ' jg_blocks-hero_slideshow';
-	wrapperProps.style = {};
 	wrapperProps.style.height = attributes?.height || '32rem';
 
 	//extract button styles
-	const buttonStyles = {
-		color: attributes?.style?.elements?.button?.text || '#ffffff',
-		backgroundColor: attributes?.style?.elements?.button?.background || '#000000',
+	const buttonBg = attributes?.style?.elements?.button?.background || '#000000';
+	const buttonText = attributes?.style?.elements?.button?.text || '#ffffff';
+	const buttonProps = {
+		className: '',
+		style: {
+			background: buttonBg,
+			color: buttonText,
+		}
+	};
+
+	//handle preset bg color
+	if(buttonBg.includes('var:preset|color|')) {
+		buttonProps.style.background = '';
+		buttonProps.className += 'has-background';
+		buttonProps.className += 'has-' + buttonBg.match(/var:preset|color|(\w+)/)[1] + "-background-color";
 	}
-	console.log(blockProps);
+
+	//handle preset text color
+	if(buttonText.includes('var:preset|color|')) {
+		buttonProps.style.color = '';
+		buttonProps.className += 'has-color';
+		buttonProps.className += 'has-' + buttonText.match(/var:preset|color|(\w+)/)[1] + "-color";
+	}
+
+	//create action button props
+	const actionBtnProps = {
+		...buttonProps
+	}
+	actionBtnProps.className += ' jg_blocks-hero_slideshow_action_button';
+
+	//create arrow button props
+	const arrowBtnProps = {
+		...buttonProps
+	}
+	arrowBtnProps.className += ' jg_blocks-hero_slideshow_control';
+
+	console.log("------")
+	console.log(buttonText)	
+	console.log(buttonBg)
+	console.log(attributes);
+	console.log(actionBtnProps);
+	console.log(arrowBtnProps);
 
 	//state var for which slide is selected
 	const [selectedSlide, setSelectedSlide] = useState(0);
@@ -137,8 +170,7 @@ export default function Edit(
 
 				<div className="jg_blocks-hero_slideshow_controls">
 					<div
-						className="jg_blocks-hero_slideshow_control"
-						style={ buttonStyles }
+						{ ...arrowBtnProps }
 						onClick={() => {
 							setSelectedSlide((selectedSlide - 1) >= 0 ? selectedSlide - 1 : attributes?.slides.length - 1);
 						}}
@@ -147,40 +179,25 @@ export default function Edit(
 					</div>
 
 					<div>
-						<RichText
-							tagName="span"
-							className="jg_blocks-hero_slideshow_title"
-							value={attributes?.slides[selectedSlide]?.content?.title || "Slide Title"}
-							onChange={(value) => {
-								const newSlides = [...attributes.slides];
-								if (!newSlides[selectedSlide].content) {
-									newSlides[selectedSlide].content = {};
-								}
-								newSlides[selectedSlide].content.title = value;
-								setAttributes({ slides: newSlides });
-							}}
-							placeholder={__("Slide Title", "hero-slideshow")}
-						/>
 						
 						<RichText
 							tagName="p"
 							className="jg_blocks-hero_slideshow_text"
-							value={attributes?.slides[selectedSlide]?.content?.text || "Put some descriptive slide text here."}
+							value={attributes?.slides[selectedSlide]?.content?.caption || "Put a descriptive slide caption here."}
 							onChange={(value) => {
 								const newSlides = [...attributes.slides];
 								if (!newSlides[selectedSlide].content) {
 									newSlides[selectedSlide].content = {};
 								}
-								newSlides[selectedSlide].content.text = value;
+								newSlides[selectedSlide].content.caption = value;
 								setAttributes({ slides: newSlides });
 							}}
-							placeholder={__("Put some descriptive slide text here.", "hero-slideshow")}
+							placeholder={__("Put a descriptive slide caption here.", "hero-slideshow")}
 						/>
 
 						<div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
 							<div
-								className="jg_blocks-hero_slideshow_action_button"
-								style={ buttonStyles }
+								{ ...actionBtnProps }
 							>
 								{ attributes?.slides[selectedSlide]?.content?.buttonText || "Go!" }
 							</div>
@@ -189,8 +206,7 @@ export default function Edit(
 
 					<span style={{ display: "none" }} >{ selectedSlide + 1 } / { attributes?.slides?.length }</span>
 					<div
-						className="jg_blocks-hero_slideshow_control"
-						style={ buttonStyles }
+						{ ...arrowBtnProps }
 						onClick={() => {
 							setSelectedSlide(selectedSlide + 1 < attributes?.slides.length ? selectedSlide + 1 : 0);
 						}}
