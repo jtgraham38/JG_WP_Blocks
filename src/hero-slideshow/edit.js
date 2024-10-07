@@ -91,7 +91,8 @@ export default function Edit(
 				<PanelBody>
 					<div className="jg_blocks-inspector_inputs">
 						<div className="jg_blocks-inspector_input_group">
-							<label htmlFor={ "jg_blocks-hero_slideshow_height_" + blockID } >Height</label>
+							<label htmlFor={"jg_blocks-hero_slideshow_height_" + blockID} >Height</label>
+							<small>Note: will not exceed view height.</small>
 							<input
 								id={ "jg_blocks-hero_slideshow_height_" + blockID }
 								type="range"

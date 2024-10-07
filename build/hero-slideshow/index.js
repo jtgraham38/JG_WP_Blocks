@@ -118,6 +118,8 @@ function Edit({
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
               htmlFor: "jg_blocks-hero_slideshow_height_" + blockID,
               children: "Height"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("small", {
+              children: "Note: will not exceed view height."
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
               id: "jg_blocks-hero_slideshow_height_" + blockID,
               type: "range",
