@@ -69,20 +69,22 @@ function Edit({
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
 
   //get all the non-style related block props for the wrapper
-  const blockPropsNoStyle = {
+  const wrapperProps = {
     ...blockProps
   };
-  blockPropsNoStyle.className = blockPropsNoStyle.className.split(' ').filter(className => {
+  wrapperProps.className = wrapperProps.className.split(' ').filter(className => {
     return !className.startsWith('has-') && !className.startsWith('is-');
   }).join(' ');
-  blockPropsNoStyle.className += ' jg_blocks-hero_slideshow';
-  delete blockPropsNoStyle.style;
+  wrapperProps.className += ' jg_blocks-hero_slideshow';
+  wrapperProps.style = {};
+  wrapperProps.style.height = attributes?.height || '32rem';
 
   //extract button styles
   const buttonStyles = {
-    color: blockProps.style.color,
-    backgroundColor: blockProps.style.backgroundColor
+    color: attributes?.style?.elements?.button?.text || '#ffffff',
+    backgroundColor: attributes?.style?.elements?.button?.background || '#000000'
   };
+  console.log(blockProps);
 
   //state var for which slide is selected
   const [selectedSlide, setSelectedSlide] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(0);
@@ -105,13 +107,13 @@ function Edit({
   };
 
   //generate an id string for the instance of the block
-  const blockID = Date.now();
+  const blockID = blockProps.id;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "jg_blocks-inspector_inputs",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "jg_blocks-inspector_input_group",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
               htmlFor: "jg_blocks-hero_slideshow_height_" + blockID,
@@ -121,33 +123,42 @@ function Edit({
               type: "range",
               min: 24,
               max: 256,
-              value: attributes?.height.substring(0, -3) || 32,
+              value: attributes?.height.slice(0, -3) || 32,
               onChange: event => {
                 setAttributes({
                   height: event.target.value.toString() + "rem"
                 });
               }
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+              children: attributes?.height.toString() || "32rem"
             })]
-          })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+            className: "jg_blocks-inspector_input_group",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUploadCheck, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+                htmlFor: "jg_blocks-hero_slideshow_images_" + blockID,
+                children: "Select Slide Images"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
+                id: "jg_blocks-hero_slideshow_images_" + blockID,
+                onSelect: onSelectMedia,
+                allowedTypes: ['image'],
+                value: attributes?.slides ? attributes?.slides.map(slide => slide.id) : [],
+                multiple: true,
+                gallery: true,
+                render: ({
+                  open
+                }) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+                  onClick: open,
+                  children: attributes?.slides && attributes?.slides?.length > 0 ? '' : 'Select Images'
+                })
+              })]
+            })
+          })]
         })
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-      ...blockPropsNoStyle,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUploadCheck, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
-          onSelect: onSelectMedia,
-          allowedTypes: ['image'],
-          value: attributes?.slides ? attributes?.slides.map(slide => slide.id) : [],
-          multiple: true,
-          gallery: true,
-          render: ({
-            open
-          }) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-            onClick: open,
-            children: attributes?.slides && attributes?.slides?.length > 0 ? '' : 'Select Images'
-          })
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      ...wrapperProps,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "jg_blocks-hero_slideshow_controls",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "jg_blocks-hero_slideshow_control",
@@ -418,7 +429,7 @@ module.exports = window["wp"]["i18n"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner"],"category":"widgets","icon":"smiley","description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number","default":""},"url":{"type":"string","default":""},"alt":{"type":"string","default":""},"content":{"type":"object","properties":{"title":{"type":"string","default":""},"text":{"type":"string","default":""},"buttonText":{"type":"string","default":""}}}}}},"backgroundColor":{"type":"string","default":"#ffffff"},"textColor":{"type":"string","default":"#000000"},"height":{"type":"string","default":"32rem;"}},"supports":{"html":false,"color":{"background":true,"text":true}},"textdomain":"jg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner"],"category":"widgets","icon":"smiley","description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number","default":""},"url":{"type":"string","default":""},"alt":{"type":"string","default":""},"content":{"type":"object","properties":{"title":{"type":"string","default":""},"text":{"type":"string","default":""},"buttonText":{"type":"string","default":""}}}}}},"height":{"type":"string","default":"32rem"},"textColor":{"type":"string","default":"#000000"},"style":{"type":"object","default":{"elements":{"button":{"color":{"text":"var:preset|color|contrast","background":"#000000"}}}}}},"supports":{"html":false,"color":{"text":true,"background":false,"button":true}},"textdomain":"jg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

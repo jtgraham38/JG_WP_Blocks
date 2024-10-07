@@ -43,18 +43,20 @@ export default function Edit(
 	const blockProps = useBlockProps();
 
 	//get all the non-style related block props for the wrapper
-	const blockPropsNoStyle = {...blockProps};
-	blockPropsNoStyle.className = blockPropsNoStyle.className.split(' ').filter( (className) => {
+	const wrapperProps = {...blockProps};
+	wrapperProps.className = wrapperProps.className.split(' ').filter( (className) => {
 		return !className.startsWith('has-') && !className.startsWith('is-');
 	}).join(' ');
-	blockPropsNoStyle.className += ' jg_blocks-hero_slideshow';
-	delete blockPropsNoStyle.style;
+	wrapperProps.className += ' jg_blocks-hero_slideshow';
+	wrapperProps.style = {};
+	wrapperProps.style.height = attributes?.height || '32rem';
 
 	//extract button styles
 	const buttonStyles = {
-		color: blockProps.style.color,
-		backgroundColor: blockProps.style.backgroundColor,
+		color: attributes?.style?.elements?.button?.text || '#ffffff',
+		backgroundColor: attributes?.style?.elements?.button?.background || '#000000',
 	}
+	console.log(blockProps);
 
 	//state var for which slide is selected
 	const [selectedSlide, setSelectedSlide] = useState(0);
@@ -79,7 +81,7 @@ export default function Edit(
 	};
 
 	//generate an id string for the instance of the block
-	const blockID = Date.now();
+	const blockID = blockProps.id
 
 	
 
@@ -95,38 +97,42 @@ export default function Edit(
 								type="range"
 								min={24}
 								max={256}
-								value={attributes?.height.substring(0, -3) || 32}
+								value={attributes?.height.slice(0, -3) || 32}
 								onChange={(event) => {
 									setAttributes({ height: event.target.value.toString() + "rem" });
 								}}
 							/>
+							<span>{attributes?.height.toString()|| "32rem"}</span>
+						</div>
+						<div className="jg_blocks-inspector_input_group">
+							<MediaUploadCheck>
+								<label htmlFor={ "jg_blocks-hero_slideshow_images_" + blockID } >Select Slide Images</label>
+								<MediaUpload
+									id={ "jg_blocks-hero_slideshow_images_" + blockID }
+									onSelect={onSelectMedia}
+									allowedTypes={['image']}
+									value={attributes?.slides ? attributes?.slides.map((slide) => slide.id) : []}
+									multiple
+									gallery
+									render={({ open }) => (
+										<Button onClick={open}>
+											{
+												attributes?.slides && attributes?.slides?.length > 0 ?
+												'' 
+												: 
+												(
+													'Select Images'
+												)
+											}
+										</Button>
+									)}
+								/>
+							</MediaUploadCheck>
 						</div>
 					</div>
 				</PanelBody>
 			</InspectorControls>
-			<div { ...blockPropsNoStyle }>
-				<MediaUploadCheck>
-					<MediaUpload
-						onSelect={onSelectMedia}
-						allowedTypes={['image']}
-						value={attributes?.slides ? attributes?.slides.map((slide) => slide.id) : []}
-						multiple
-						gallery
-						render={({ open }) => (
-							<Button onClick={open}>
-								{
-									attributes?.slides && attributes?.slides?.length > 0 ?
-									'' 
-									: 
-									(
-										'Select Images'
-									)
-								}
-							</Button>
-						)}
-					/>
-				</MediaUploadCheck>
-				<br/>
+			<div {...wrapperProps}>
 
 				<div className="jg_blocks-hero_slideshow_controls">
 					<div

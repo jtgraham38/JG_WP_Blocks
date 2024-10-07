@@ -52,24 +52,34 @@
 				}
 			}
 		},
-		"backgroundColor": {
-            "type": "string",
-            "default": "#ffffff"
-        },
+		"height": {
+			"type": "string",
+			"default": "32rem"
+		},
         "textColor": {
             "type": "string",
             "default": "#000000"
         },
-		"height": {
-			"type": "string",
-			"default": "32rem;"
+		"style": {
+			"type": "object",
+			"default": {
+				"elements": {
+					"button": {
+						"color": {
+							"text": "var:preset|color|contrast",
+							"background": "#000000"
+						}
+					}
+				}
+			}
 		}
 	},
 	"supports": {
 		"html": false,
 		"color": {
-			"background": true,
-			"text": true
+			"text": true,
+			"background": false,
+			"button": true
 		}
 	},
 	"textdomain": "jg-blocks",
