@@ -78,6 +78,12 @@ function Edit({
   blockPropsNoStyle.className += ' jg_blocks-hero_slideshow';
   delete blockPropsNoStyle.style;
 
+  //extract button styles
+  const buttonStyles = {
+    color: blockProps.style.color,
+    backgroundColor: blockProps.style.backgroundColor
+  };
+
   //state var for which slide is selected
   const [selectedSlide, setSelectedSlide] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(0);
 
@@ -144,9 +150,8 @@ function Edit({
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "jg_blocks-hero_slideshow_controls",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-          ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-            className: "jg_blocks-hero_slideshow_control"
-          }),
+          className: "jg_blocks-hero_slideshow_control",
+          style: buttonStyles,
           onClick: () => {
             setSelectedSlide(selectedSlide - 1 >= 0 ? selectedSlide - 1 : attributes?.slides.length - 1);
           },
@@ -190,9 +195,8 @@ function Edit({
               width: "100%"
             },
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-              ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-                className: "jg_blocks-hero_slideshow_action_button"
-              }),
+              className: "jg_blocks-hero_slideshow_action_button",
+              style: buttonStyles,
               children: attributes?.slides[selectedSlide]?.content?.buttonText || "Go!"
             })
           })]
@@ -202,9 +206,8 @@ function Edit({
           },
           children: [selectedSlide + 1, " / ", attributes?.slides?.length]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-          ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-            className: "jg_blocks-hero_slideshow_control"
-          }),
+          className: "jg_blocks-hero_slideshow_control",
+          style: buttonStyles,
           onClick: () => {
             setSelectedSlide(selectedSlide + 1 < attributes?.slides.length ? selectedSlide + 1 : 0);
           },

@@ -50,6 +50,12 @@ export default function Edit(
 	blockPropsNoStyle.className += ' jg_blocks-hero_slideshow';
 	delete blockPropsNoStyle.style;
 
+	//extract button styles
+	const buttonStyles = {
+		color: blockProps.style.color,
+		backgroundColor: blockProps.style.backgroundColor,
+	}
+
 	//state var for which slide is selected
 	const [selectedSlide, setSelectedSlide] = useState(0);
 
@@ -124,11 +130,8 @@ export default function Edit(
 
 				<div className="jg_blocks-hero_slideshow_controls">
 					<div
-						{...useBlockProps(
-							{
-								className: "jg_blocks-hero_slideshow_control"
-							}
-						)}
+						className="jg_blocks-hero_slideshow_control"
+						style={ buttonStyles }
 						onClick={() => {
 							setSelectedSlide((selectedSlide - 1) >= 0 ? selectedSlide - 1 : attributes?.slides.length - 1);
 						}}
@@ -168,9 +171,10 @@ export default function Edit(
 						/>
 
 						<div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-							<div {...useBlockProps(
-								{ className: "jg_blocks-hero_slideshow_action_button" }
-							)}>
+							<div
+								className="jg_blocks-hero_slideshow_action_button"
+								style={ buttonStyles }
+							>
 								{ attributes?.slides[selectedSlide]?.content?.buttonText || "Go!" }
 							</div>
 						</div>
@@ -178,11 +182,8 @@ export default function Edit(
 
 					<span style={{ display: "none" }} >{ selectedSlide + 1 } / { attributes?.slides?.length }</span>
 					<div
-						{...useBlockProps(
-							{
-								className: "jg_blocks-hero_slideshow_control"
-							}
-						)}
+						className="jg_blocks-hero_slideshow_control"
+						style={ buttonStyles }
 						onClick={() => {
 							setSelectedSlide(selectedSlide + 1 < attributes?.slides.length ? selectedSlide + 1 : 0);
 						}}
