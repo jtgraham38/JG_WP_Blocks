@@ -108,6 +108,19 @@ export default function Edit(
 		});
 	};
 
+	//track the last slide change button clicked
+	const [lastSlideChange, setLastSlideChange] = useState('');
+
+	function nextSlide() {
+		setLastSlideChange('next');
+		setSelectedSlide(selectedSlide + 1 < attributes?.slides.length ? selectedSlide + 1 : 0);
+	}
+
+	function prevSlide() {
+		setLastSlideChange('prev');
+		setSelectedSlide((selectedSlide - 1) >= 0 ? selectedSlide - 1 : attributes?.slides.length - 1);
+	}
+
 	//generate an id string for the instance of the block
 	const blockID = blockProps.id
 
@@ -159,7 +172,7 @@ export default function Edit(
 					<div
 						{ ...arrowBtnProps }
 						onClick={() => {
-							setSelectedSlide((selectedSlide - 1) >= 0 ? selectedSlide - 1 : attributes?.slides.length - 1);
+							prevSlide();
 						}}
 					>
 						←
@@ -210,7 +223,7 @@ export default function Edit(
 					<div
 						{ ...arrowBtnProps }
 						onClick={() => {
-							setSelectedSlide(selectedSlide + 1 < attributes?.slides.length ? selectedSlide + 1 : 0);
+							nextSlide();
 						}}
 					>
 						→
@@ -220,7 +233,7 @@ export default function Edit(
 					attributes?.slides && attributes?.slides?.length > 0 ? (
 						attributes?.slides.map((slide, index) => (
 							<div
-								className={`jg_blocks-hero_slideshow_slide ${selectedSlide == index ? '' : 'jg_blocks-hidden'}`}
+								className={`jg_blocks-hero_slideshow_slide ${selectedSlide == index ? 'jg_blocks-hero_slideshow_selected_slide ' + (lastSlideChange == 'prev' ? 'jg_blocks-hero_slideshow_slide_left' : 'jg_blocks-hero_slideshow_slide_right') : 'jg_blocks-hidden'}`}
 								key={index}
 							>
 								<img 

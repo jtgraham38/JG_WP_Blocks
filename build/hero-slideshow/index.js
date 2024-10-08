@@ -134,6 +134,17 @@ function Edit({
     });
   };
 
+  //track the last slide change button clicked
+  const [lastSlideChange, setLastSlideChange] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)('');
+  function nextSlide() {
+    setLastSlideChange('next');
+    setSelectedSlide(selectedSlide + 1 < attributes?.slides.length ? selectedSlide + 1 : 0);
+  }
+  function prevSlide() {
+    setLastSlideChange('prev');
+    setSelectedSlide(selectedSlide - 1 >= 0 ? selectedSlide - 1 : attributes?.slides.length - 1);
+  }
+
   //generate an id string for the instance of the block
   const blockID = blockProps.id;
   console.log("attributes", attributes.slides);
@@ -194,7 +205,7 @@ function Edit({
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           ...arrowBtnProps,
           onClick: () => {
-            setSelectedSlide(selectedSlide - 1 >= 0 ? selectedSlide - 1 : attributes?.slides.length - 1);
+            prevSlide();
           },
           children: "\u2190"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -249,12 +260,12 @@ function Edit({
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           ...arrowBtnProps,
           onClick: () => {
-            setSelectedSlide(selectedSlide + 1 < attributes?.slides.length ? selectedSlide + 1 : 0);
+            nextSlide();
           },
           children: "\u2192"
         })]
       }), attributes?.slides && attributes?.slides?.length > 0 ? attributes?.slides.map((slide, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        className: `jg_blocks-hero_slideshow_slide ${selectedSlide == index ? '' : 'jg_blocks-hidden'}`,
+        className: `jg_blocks-hero_slideshow_slide ${selectedSlide == index ? 'jg_blocks-hero_slideshow_selected_slide ' + (lastSlideChange == 'prev' ? 'jg_blocks-hero_slideshow_slide_left' : 'jg_blocks-hero_slideshow_slide_right') : 'jg_blocks-hidden'}`,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
           className: "jg_blocks-hero_slideshow_image",
           src: slide.url,
