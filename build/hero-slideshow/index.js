@@ -221,7 +221,22 @@ function Edit({
             },
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
               ...actionBtnProps,
-              children: attributes?.slides[selectedSlide]?.content?.buttonText || "Go!"
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
+                tagName: "p",
+                className: "jg_blocks-hero_slideshow_button_text",
+                value: attributes?.slides[selectedSlide]?.content?.buttonText || "Go!",
+                onChange: value => {
+                  const newSlides = [...attributes.slides];
+                  if (!newSlides[selectedSlide].content) {
+                    newSlides[selectedSlide].content = {};
+                  }
+                  newSlides[selectedSlide].content.buttonText = value;
+                  setAttributes({
+                    slides: newSlides
+                  });
+                },
+                placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Put a button caption here.", "hero-slideshow-button")
+              })
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
@@ -236,7 +251,7 @@ function Edit({
           },
           children: "\u2192"
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), attributes?.slides && attributes?.slides?.length > 0 ? attributes?.slides.map((slide, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      }), attributes?.slides && attributes?.slides?.length > 0 ? attributes?.slides.map((slide, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: `jg_blocks-hero_slideshow_slide ${selectedSlide == index ? '' : 'jg_blocks-hidden'}`,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
           className: "jg_blocks-hero_slideshow_image",

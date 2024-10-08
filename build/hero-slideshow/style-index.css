@@ -33,6 +33,7 @@
 }
 .jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_controls {
   position: absolute;
+  width: 100%;
   top: 50%;
   width: 100%;
   display: flex;

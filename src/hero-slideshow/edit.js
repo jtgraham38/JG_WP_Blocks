@@ -162,7 +162,6 @@ export default function Edit(
 				</PanelBody>
 			</InspectorControls>
 			<div {...wrapperProps}>
-
 				<div className="jg_blocks-hero_slideshow_controls">
 					<div
 						{ ...arrowBtnProps }
@@ -194,7 +193,21 @@ export default function Edit(
 							<div
 								{ ...actionBtnProps }
 							>
-								{ attributes?.slides[selectedSlide]?.content?.buttonText || "Go!" }
+								<RichText
+									tagName="p"
+									className="jg_blocks-hero_slideshow_button_text"
+									value={ attributes?.slides[selectedSlide]?.content?.buttonText || "Go!" }
+									onChange={(value) => {
+										const newSlides = [...attributes.slides];
+										if (!newSlides[selectedSlide].content) {
+											newSlides[selectedSlide].content = {};
+										}
+										newSlides[selectedSlide].content.buttonText = value;
+										setAttributes({ slides: newSlides });
+									}}
+									placeholder={__("Put a button caption here.", "hero-slideshow-button")}
+								/>
+								
 							</div>
 						</div>
 					</div>
@@ -209,10 +222,6 @@ export default function Edit(
 						→
 					</div>
 				</div>
-
-
-				<br/>
-
 				{
 					attributes?.slides && attributes?.slides?.length > 0 ? (
 						attributes?.slides.map((slide, index) => (
