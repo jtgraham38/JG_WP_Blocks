@@ -136,6 +136,7 @@ function Edit({
 
   //generate an id string for the instance of the block
   const blockID = blockProps.id;
+  console.log("attributes", attributes.slides);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
@@ -226,6 +227,7 @@ function Edit({
                 className: "jg_blocks-hero_slideshow_button_text",
                 value: attributes?.slides[selectedSlide]?.content?.buttonText || "Go!",
                 onChange: value => {
+                  console.log("go", value);
                   const newSlides = [...attributes.slides];
                   if (!newSlides[selectedSlide].content) {
                     newSlides[selectedSlide].content = {};

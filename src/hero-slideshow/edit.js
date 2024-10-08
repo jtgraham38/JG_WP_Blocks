@@ -22,7 +22,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 import './editor.scss';
 
 //my imports
-import { MediaUpload, MediaUploadCheck, RichText, InspectorControls } from '@wordpress/block-editor';
+import { MediaUpload, MediaUploadCheck, RichText, InspectorControls, URLInputButton } from '@wordpress/block-editor';
 import { Button, PanelBody } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
@@ -111,7 +111,7 @@ export default function Edit(
 	//generate an id string for the instance of the block
 	const blockID = blockProps.id
 
-	
+	console.log("attributes", attributes.slides);
 
 	return (
 		<>
@@ -198,6 +198,7 @@ export default function Edit(
 									className="jg_blocks-hero_slideshow_button_text"
 									value={ attributes?.slides[selectedSlide]?.content?.buttonText || "Go!" }
 									onChange={(value) => {
+										console.log("go", value);
 										const newSlides = [...attributes.slides];
 										if (!newSlides[selectedSlide].content) {
 											newSlides[selectedSlide].content = {};
