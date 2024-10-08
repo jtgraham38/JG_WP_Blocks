@@ -119,6 +119,24 @@ export default function Edit(
 				<PanelBody>
 					<div className="jg_blocks-inspector_inputs">
 						<div className="jg_blocks-inspector_input_group">
+							<label htmlFor={ "jg_blocks-hero_slideshow_images_" + blockID } >Select Slide Images</label>
+							<MediaUploadCheck>
+								<MediaUpload
+									id={ "jg_blocks-hero_slideshow_images_" + blockID }
+									onSelect={onSelectMedia}
+									allowedTypes={['image']}
+									value={attributes?.slides ? attributes?.slides.map((slide) => slide.id) : []}
+									multiple
+									gallery
+									render={({ open }) => (
+										<Button onClick={open}>
+											Open Selector
+										</Button>
+									)}
+								/>
+							</MediaUploadCheck>
+						</div>
+						<div className="jg_blocks-inspector_input_group">
 							<label htmlFor={"jg_blocks-hero_slideshow_height_" + blockID} >Height</label>
 							<small>Note: will not exceed view height.</small>
 							<input
@@ -132,31 +150,6 @@ export default function Edit(
 								}}
 							/>
 							<span>{attributes?.height.toString()|| "32rem"}</span>
-						</div>
-						<div className="jg_blocks-inspector_input_group">
-							<MediaUploadCheck>
-								<label htmlFor={ "jg_blocks-hero_slideshow_images_" + blockID } >Select Slide Images</label>
-								<MediaUpload
-									id={ "jg_blocks-hero_slideshow_images_" + blockID }
-									onSelect={onSelectMedia}
-									allowedTypes={['image']}
-									value={attributes?.slides ? attributes?.slides.map((slide) => slide.id) : []}
-									multiple
-									gallery
-									render={({ open }) => (
-										<Button onClick={open}>
-											{
-												attributes?.slides && attributes?.slides?.length > 0 ?
-												'' 
-												: 
-												(
-													'Select Images'
-												)
-											}
-										</Button>
-									)}
-								/>
-							</MediaUploadCheck>
 						</div>
 					</div>
 				</PanelBody>
