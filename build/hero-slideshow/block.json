@@ -52,6 +52,10 @@
       "type": "string",
       "default": "32rem"
     },
+    "autoPlay": {
+      "type": "number",
+      "default": 5000
+    },
     "textColor": {
       "type": "string",
       "default": "#ffffff"

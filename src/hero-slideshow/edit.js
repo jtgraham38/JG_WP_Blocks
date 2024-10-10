@@ -162,7 +162,24 @@ export default function Edit(
 									setAttributes({ height: event.target.value.toString() + "rem" });
 								}}
 							/>
-							<span>{attributes?.height.toString()|| "32rem"}</span>
+							<div style={{textAlign: "center"}}>{attributes?.height.toString()|| "32rem"}</div>
+						</div>
+						<div className="jg_blocks-inspector_input_group">
+							<label htmlFor={"jg_blocks-hero_slideshow_autoplay_interval_" + blockID} >Autoplay Interval</label>
+							<div style={{display: "flex", alignItems: "center"}}>
+								<input
+									id={ "jg_blocks-hero_slideshow_autoplay_interval_" + blockID }
+									type="number"
+									min={0}
+									max={60}
+									value={attributes?.autoPlay / 1000 || 5}
+									onChange={(event) => {
+										setAttributes({ autoPlay: event.target.value * 1000 });
+									}}
+									style={{marginRight: "0.5rem"}}
+								/>
+								<span>seconds</span>
+							</div>
 						</div>
 					</div>
 				</PanelBody>
