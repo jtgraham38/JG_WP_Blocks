@@ -90,21 +90,54 @@ export default function Edit(
 	const [selectedSlide, setSelectedSlide] = useState(0);
 
 	// function to handle the media selection
-    const onSelectMedia = (media) => {
+	const onSelectMedia = (newMedia) => {
 
-		//construct media array
-		const slides = [];
-		media.map((media) => {
-			media = {
-				id: media.id,
-				url: media.url,
-				alt: media.alt,
-			};
-			slides.push(media);
-		});
+		//determine if new images were added, or if an order edit or delete occurred
+		//if the latter, the media array will contain the new order of slides
+		//if the former, the media array will contain the new slides
+		
+		//check if new images were added
+		const oldMediaIDs = attributes?.slides?.map((slide) => slide.id);
+		const newMediaIDs = newMedia.map((slide) => slide.id);
 
+		//if there is anything in newMediaIDs that is not in oldMediaIDs, then a CREATION of new slides occurred
+		const newSlides = newMediaIDs.filter((id) => !oldMediaIDs.includes(id));
+		let newSlidesAttrValue = [];
+		if (newSlides.length > 0) {
+			console.log("new slides added: ", newSlides);
+			
+			//add the new slides to the existing slides
+			//preserve the existing slides
+			const slides = [...attributes?.slides];
+			newMedia.map((media) => {
+				media = {
+					id: media.id,
+					url: media.url,
+					alt: media.alt,
+				};
+				slides.push(media);
+			});
+			
+			//save the new slides to the attribute
+			newSlidesAttrValue = slides;
+		}
+		//otherwise, either an ORDER EDIT or a DELETION of existing slides occurred
+		else {
+			console.log("no new slides added");
+
+			//remove any slides that were deleted (slides in oldMediaIDs that are not in newMediaIDs)
+			const nonDeletedSlides = attributes?.slides?.filter((slide) => newMediaIDs.includes(slide.id));
+
+			//order nondeleted slides based on the order of newMediaIDs
+			const orderedSlides = newMediaIDs.map((id) => nonDeletedSlides.find((slide) => slide.id == id));
+
+			//save the ordered slides to the attribute
+			newSlidesAttrValue = orderedSlides;
+		}
+
+		//update the slides attribute
 		setAttributes({
-			slides: slides,
+			slides: newSlidesAttrValue,
 		});
 	};
 
@@ -123,8 +156,6 @@ export default function Edit(
 
 	//generate an id string for the instance of the block
 	const blockID = blockProps.id
-
-	console.log("attributes", attributes.slides);
 
 	return (
 		<>
@@ -221,7 +252,6 @@ export default function Edit(
 									className="jg_blocks-hero_slideshow_button_text"
 									value={ attributes?.slides[selectedSlide]?.content?.buttonText || "Go!" }
 									onChange={(value) => {
-										console.log("go", value);
 										const newSlides = [...attributes.slides];
 										if (!newSlides[selectedSlide].content) {
 											newSlides[selectedSlide].content = {};
