@@ -96,6 +96,7 @@ export default function Edit(
 		//if the latter, the media array will contain the new order of slides
 		//if the former, the media array will contain the new slides
 		
+		console.log("NEWMEDIA: ", newMedia);
 		//check if new images were added
 		const oldMediaIDs = attributes?.slides?.map((slide) => slide.id);
 		const newMediaIDs = newMedia.map((slide) => slide.id);
@@ -130,6 +131,19 @@ export default function Edit(
 
 			//order nondeleted slides based on the order of newMediaIDs
 			const orderedSlides = newMediaIDs.map((id) => nonDeletedSlides.find((slide) => slide.id == id));
+
+			//apply the captions from the selector to the caption field of the slides
+			console.log("ordered slides: ", orderedSlides);
+			console.log("new media: ", newMedia);
+			orderedSlides.map((slide, index) => {
+				if (newMedia[index].caption) {
+					if (!slide?.content) {
+						slide.content = {};
+					}
+					slide.content.caption = newMedia[index].caption;
+					
+				}
+			});
 
 			//save the ordered slides to the attribute
 			newSlidesAttrValue = orderedSlides;
