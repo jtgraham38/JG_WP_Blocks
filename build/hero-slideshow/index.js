@@ -151,8 +151,6 @@ function Edit({
     }
     //otherwise, either an ORDER EDIT or a DELETION of existing slides occurred
     else {
-      console.log("no new slides added");
-
       //remove any slides that were deleted (slides in oldMediaIDs that are not in newMediaIDs)
       const nonDeletedSlides = attributes?.slides?.filter(slide => newMediaIDs.includes(slide.id));
 
@@ -160,8 +158,6 @@ function Edit({
       const orderedSlides = newMediaIDs.map(id => nonDeletedSlides.find(slide => slide.id == id));
 
       //apply the captions from the selector to the caption field of the slides
-      console.log("ordered slides: ", orderedSlides);
-      console.log("new media: ", newMedia);
       orderedSlides.map((slide, index) => {
         if (newMedia[index].caption) {
           if (!slide?.content) {
@@ -285,7 +281,26 @@ function Edit({
             prevSlide();
           },
           children: "\u2190"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
+          style: {
+            display: "none"
+          },
+          children: [selectedSlide + 1, " / ", attributes?.slides?.length]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          ...arrowBtnProps,
+          onClick: () => {
+            nextSlide();
+          },
+          children: "\u2192"
+        })]
+      }), attributes?.slides && attributes?.slides?.length > 0 ? attributes?.slides.map((slide, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: `jg_blocks-hero_slideshow_slide ${selectedSlide == index ? 'jg_blocks-hero_slideshow_selected_slide ' + (lastSlideChange == 'prev' ? 'jg_blocks-hero_slideshow_slide_left' : 'jg_blocks-hero_slideshow_slide_right') : 'jg_blocks-hidden'}`,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+          className: "jg_blocks-hero_slideshow_image",
+          src: slide.url,
+          alt: slide.alt
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          className: "jg_blocks-hero_slideshow_slide_content",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
             tagName: "p",
             className: "jg_blocks-hero_slideshow_text",
@@ -328,25 +343,7 @@ function Edit({
               })
             })
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
-          style: {
-            display: "none"
-          },
-          children: [selectedSlide + 1, " / ", attributes?.slides?.length]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-          ...arrowBtnProps,
-          onClick: () => {
-            nextSlide();
-          },
-          children: "\u2192"
         })]
-      }), attributes?.slides && attributes?.slides?.length > 0 ? attributes?.slides.map((slide, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        className: `jg_blocks-hero_slideshow_slide ${selectedSlide == index ? 'jg_blocks-hero_slideshow_selected_slide ' + (lastSlideChange == 'prev' ? 'jg_blocks-hero_slideshow_slide_left' : 'jg_blocks-hero_slideshow_slide_right') : 'jg_blocks-hidden'}`,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-          className: "jg_blocks-hero_slideshow_image",
-          src: slide.url,
-          alt: slide.alt
-        })
       }, index)) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
         children: "Add Images to the Slide Show"
       })]

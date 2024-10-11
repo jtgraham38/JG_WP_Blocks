@@ -124,7 +124,6 @@ export default function Edit(
 		}
 		//otherwise, either an ORDER EDIT or a DELETION of existing slides occurred
 		else {
-			console.log("no new slides added");
 
 			//remove any slides that were deleted (slides in oldMediaIDs that are not in newMediaIDs)
 			const nonDeletedSlides = attributes?.slides?.filter((slide) => newMediaIDs.includes(slide.id));
@@ -133,8 +132,6 @@ export default function Edit(
 			const orderedSlides = newMediaIDs.map((id) => nonDeletedSlides.find((slide) => slide.id == id));
 
 			//apply the captions from the selector to the caption field of the slides
-			console.log("ordered slides: ", orderedSlides);
-			console.log("new media: ", newMedia);
 			orderedSlides.map((slide, index) => {
 				if (newMedia[index].caption) {
 					if (!slide?.content) {
@@ -240,47 +237,8 @@ export default function Edit(
 						←
 					</div>
 
-					<div>
-						
-						<RichText
-							tagName="p"
-							className="jg_blocks-hero_slideshow_text"
-							value={attributes?.slides[selectedSlide]?.content?.caption || "Put a descriptive slide caption here."}
-							onChange={(value) => {
-								const newSlides = [...attributes.slides];
-								if (!newSlides[selectedSlide].content) {
-									newSlides[selectedSlide].content = {};
-								}
-								newSlides[selectedSlide].content.caption = value;
-								setAttributes({ slides: newSlides });
-							}}
-							placeholder={__("Put a descriptive slide caption here.", "hero-slideshow")}
-						/>
-
-						<div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-							<div
-								{ ...actionBtnProps }
-							>
-								<RichText
-									tagName="p"
-									className="jg_blocks-hero_slideshow_button_text"
-									value={ attributes?.slides[selectedSlide]?.content?.buttonText || "Go!" }
-									onChange={(value) => {
-										const newSlides = [...attributes.slides];
-										if (!newSlides[selectedSlide].content) {
-											newSlides[selectedSlide].content = {};
-										}
-										newSlides[selectedSlide].content.buttonText = value;
-										setAttributes({ slides: newSlides });
-									}}
-									placeholder={__("Put a button caption here.", "hero-slideshow-button")}
-								/>
-								
-							</div>
-						</div>
-					</div>
-
-					<span style={{ display: "none" }} >{ selectedSlide + 1 } / { attributes?.slides?.length }</span>
+					<span style={{ display: "none" }} >{selectedSlide + 1} / {attributes?.slides?.length}</span>
+					
 					<div
 						{ ...arrowBtnProps }
 						onClick={() => {
@@ -307,6 +265,46 @@ export default function Edit(
 										JSON.stringify(slide, null, 2)
 									}
 								</pre> */}
+								<div className='jg_blocks-hero_slideshow_slide_content'>
+						
+									<RichText
+										tagName="p"
+										className="jg_blocks-hero_slideshow_text"
+										value={attributes?.slides[selectedSlide]?.content?.caption || "Put a descriptive slide caption here."}
+										onChange={(value) => {
+											const newSlides = [...attributes.slides];
+											if (!newSlides[selectedSlide].content) {
+												newSlides[selectedSlide].content = {};
+											}
+											newSlides[selectedSlide].content.caption = value;
+											setAttributes({ slides: newSlides });
+										}}
+										placeholder={__("Put a descriptive slide caption here.", "hero-slideshow")}
+									/>
+
+									<div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+										<div
+											{ ...actionBtnProps }
+										>
+											<RichText
+												tagName="p"
+												className="jg_blocks-hero_slideshow_button_text"
+												value={ attributes?.slides[selectedSlide]?.content?.buttonText || "Go!" }
+												onChange={(value) => {
+													const newSlides = [...attributes.slides];
+													if (!newSlides[selectedSlide].content) {
+														newSlides[selectedSlide].content = {};
+													}
+													newSlides[selectedSlide].content.buttonText = value;
+													setAttributes({ slides: newSlides });
+												}}
+												placeholder={__("Put a button caption here.", "hero-slideshow-button")}
+											/>
+											
+										</div>
+									</div>
+
+								</div>
 							</div>
 						))
 					) : (
