@@ -124,7 +124,6 @@ export default function Edit(
 		}
 		//otherwise, either an ORDER EDIT or a DELETION of existing slides occurred
 		else {
-
 			//remove any slides that were deleted (slides in oldMediaIDs that are not in newMediaIDs)
 			const nonDeletedSlides = attributes?.slides?.filter((slide) => newMediaIDs.includes(slide.id));
 
@@ -137,7 +136,8 @@ export default function Edit(
 					if (!slide?.content) {
 						slide.content = {};
 					}
-					slide.content.caption = newMedia[index].caption;
+					console.log(newMedia[index]);
+					slide.content.caption = newMedia[index]?.caption || 'Put a descriptive slide caption here.';
 					
 				}
 			});
@@ -145,6 +145,9 @@ export default function Edit(
 			//save the ordered slides to the attribute
 			newSlidesAttrValue = orderedSlides;
 		}
+
+		console.log("Ordered slides updated = ", newSlidesAttrValue);
+
 
 		//update the slides attribute
 		setAttributes({
@@ -271,7 +274,7 @@ export default function Edit(
 									<RichText
 										tagName="p"
 										className="jg_blocks-hero_slideshow_text"
-										value={attributes?.slides[selectedSlide]?.content?.caption || "Put a descriptive slide caption here."}
+										value={slide?.content?.caption || "Put a descriptive slide caption here."}
 										onChange={(value) => {
 											const newSlides = [...attributes.slides];
 											if (!newSlides[selectedSlide].content) {
@@ -290,7 +293,7 @@ export default function Edit(
 											<RichText
 												tagName="p"
 												className="jg_blocks-hero_slideshow_button_text"
-												value={ attributes?.slides[selectedSlide]?.content?.buttonText || "Go!" }
+												value={ slide?.content?.buttonText || "Go!" }
 												onChange={(value) => {
 													const newSlides = [...attributes.slides];
 													if (!newSlides[selectedSlide].content) {

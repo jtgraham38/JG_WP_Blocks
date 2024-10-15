@@ -163,13 +163,15 @@ function Edit({
           if (!slide?.content) {
             slide.content = {};
           }
-          slide.content.caption = newMedia[index].caption;
+          console.log(newMedia[index]);
+          slide.content.caption = newMedia[index]?.caption || 'Put a descriptive slide caption here.';
         }
       });
 
       //save the ordered slides to the attribute
       newSlidesAttrValue = orderedSlides;
     }
+    console.log("Ordered slides updated = ", newSlidesAttrValue);
 
     //update the slides attribute
     setAttributes({
@@ -304,7 +306,7 @@ function Edit({
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
             tagName: "p",
             className: "jg_blocks-hero_slideshow_text",
-            value: attributes?.slides[selectedSlide]?.content?.caption || "Put a descriptive slide caption here.",
+            value: slide?.content?.caption || "Put a descriptive slide caption here.",
             onChange: value => {
               const newSlides = [...attributes.slides];
               if (!newSlides[selectedSlide].content) {
@@ -328,7 +330,7 @@ function Edit({
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
                 tagName: "p",
                 className: "jg_blocks-hero_slideshow_button_text",
-                value: attributes?.slides[selectedSlide]?.content?.buttonText || "Go!",
+                value: slide?.content?.buttonText || "Go!",
                 onChange: value => {
                   const newSlides = [...attributes.slides];
                   if (!newSlides[selectedSlide].content) {
