@@ -20,7 +20,7 @@ export default function save(
 ) {
 
 	//get the block props
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps.save();
 
 	//get all the non-style related block props for the wrapper
 	const wrapperProps = {...blockProps};
@@ -28,8 +28,8 @@ export default function save(
 	wrapperProps.style.height = attributes?.height || '32rem';
 
 	//extract button styles
-	const buttonBg = attributes?.style?.elements?.button?.color?.background || '#000000';
-	const buttonText = attributes?.style?.elements?.button?.color?.text || '#ffffff';
+	const buttonBg = attributes?.style?.elements?.button?.color.background || '#000000';
+	const buttonText = attributes?.style?.elements?.button?.color.text || '#ffffff';
 	const buttonProps = {
 		className: '',
 		style: {
@@ -68,7 +68,6 @@ export default function save(
 
 	//generate an id string for the instance of the block
 	const blockID = blockProps.id
-	console.log("SAVED!")
 
 	return (
 		<>

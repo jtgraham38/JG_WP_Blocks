@@ -443,7 +443,7 @@ function save({
   attributes
 }) {
   //get the block props
-  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)();
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save();
 
   //get all the non-style related block props for the wrapper
   const wrapperProps = {
@@ -453,8 +453,8 @@ function save({
   wrapperProps.style.height = attributes?.height || '32rem';
 
   //extract button styles
-  const buttonBg = attributes?.style?.elements?.button?.color?.background || '#000000';
-  const buttonText = attributes?.style?.elements?.button?.color?.text || '#ffffff';
+  const buttonBg = attributes?.style?.elements?.button?.color.background || '#000000';
+  const buttonText = attributes?.style?.elements?.button?.color.text || '#ffffff';
   const buttonProps = {
     className: '',
     style: {
@@ -493,7 +493,6 @@ function save({
 
   //generate an id string for the instance of the block
   const blockID = blockProps.id;
-  console.log("SAVED!");
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       ...wrapperProps,
@@ -639,7 +638,7 @@ module.exports = window["wp"]["i18n"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner"],"category":"widgets","icon":"smiley","description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number","default":""},"url":{"type":"string","default":""},"alt":{"type":"string","default":""},"content":{"type":"object","properties":{"caption":{"type":"string","default":""},"buttonText":{"type":"string","default":""}}}}}},"height":{"type":"string","default":"32rem"},"autoPlay":{"type":"number","default":5000},"textColor":{"type":"string","default":"#ffffff"},"fontSize":{"type":"string","default":"x-large"},"style":{"type":"object","default":{"elements":{"button":{"color":{"text":"#ffffff","background":"#000000"}}}}}},"supports":{"html":false,"color":{"text":true,"background":false,"button":true},"typography":{"fontSize":true}},"textdomain":"jg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner"],"category":"widgets","icon":"smiley","description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number","default":""},"url":{"type":"string","default":""},"alt":{"type":"string","default":""},"content":{"type":"object","properties":{"caption":{"type":"string","default":""},"buttonText":{"type":"string","default":""}}}}}},"height":{"type":"string","default":"32rem"},"autoPlay":{"type":"number","default":5000},"textColor":{"type":"string","default":"#ffffff"},"fontSize":{"type":"string","default":"x-large"},"style":{"type":"object","default":{"elements":{"button":{"color":{"text":"#ffffff","background":"#000000"}}}}}},"supports":{"html":false,"color":{"text":true,"background":false,"button":true},"typography":{"fontSize":true},"interactivity":true},"textdomain":"jg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScriptModule":"file:./view.js","render":"file:./render.php"}');
 
 /***/ })
 

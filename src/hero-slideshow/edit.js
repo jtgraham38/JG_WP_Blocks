@@ -226,6 +226,7 @@ export default function Edit(
 					</div>
 				</PanelBody>
 			</InspectorControls>
+
 			<div {...wrapperProps}>
 				<div className="jg_blocks-hero_slideshow_controls">
 					<div

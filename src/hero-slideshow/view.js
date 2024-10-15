@@ -20,6 +20,33 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#view-script
  */
 
-/* eslint-disable no-console */
-console.log( 'Hello World! (from create-block-hero-slideshow block)' );
-/* eslint-enable no-console */
+/* my imports */
+import { store, getContext } from "@wordpress/interactivity";
+
+/* my code */
+
+const { state, actions, callbacks } = store('jg_blocks_hero_slideshow', {
+    actions: {
+        nextSlide() {
+            console.log('nextSlide');
+            state.currentSlide = (state.currentSlide + 1) % state.slides.length;
+        },
+        prevSlide() {
+            console.log('prevSlide');
+            state.currentSlide = (state.currentSlide - 1 + state.slides.length) % state.slides.length;
+        },
+        goToSlide(index) {
+            state.currentSlide = index;
+        },
+        startAutoPlay() {
+            //if state.autoPlay is set, start the interval
+            console.log("setting autoplay interval to ", state.autoPlay);
+            if (state.autoPlay) {
+                state.autoPlayInterval = setInterval(actions.nextSlide, state.autoPlay);
+            }
+        }
+    },
+    callbacks: {
+
+    }
+} );
