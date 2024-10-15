@@ -442,10 +442,107 @@ __webpack_require__.r(__webpack_exports__);
 function save({
   attributes
 }) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-    ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save(),
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("pre", {
-      children: JSON.stringify(attributes, null, 2)
+  //get the block props
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)();
+
+  //get all the non-style related block props for the wrapper
+  const wrapperProps = {
+    ...blockProps
+  };
+  wrapperProps.className += ' jg_blocks-hero_slideshow';
+  wrapperProps.style.height = attributes?.height || '32rem';
+
+  //extract button styles
+  const buttonBg = attributes?.style?.elements?.button?.color?.background || '#000000';
+  const buttonText = attributes?.style?.elements?.button?.color?.text || '#ffffff';
+  const buttonProps = {
+    className: '',
+    style: {
+      background: buttonBg,
+      color: buttonText
+    }
+  };
+
+  //handle preset text color
+  const textMatches = buttonText.match(/var:preset\|color\|([\w-]+)/);
+  if (textMatches && textMatches.length > 0) {
+    buttonProps.style.color = '';
+    buttonProps.className += ' has-color';
+    buttonProps.className += ' has-' + textMatches[1] + "-color";
+  }
+
+  //handle preset background color
+  const bgMatches = buttonBg.match(/var:preset\|color\|([\w-]+)/);
+  if (bgMatches && bgMatches.length > 0) {
+    buttonProps.style.background = '';
+    buttonProps.className += ' has-background';
+    buttonProps.className += ' has-' + bgMatches[1] + "-background-color";
+  }
+
+  //create action button props
+  const actionBtnProps = {
+    ...buttonProps
+  };
+  actionBtnProps.className += ' jg_blocks-hero_slideshow_action_button';
+
+  //create arrow button props
+  const arrowBtnProps = {
+    ...buttonProps
+  };
+  arrowBtnProps.className += ' jg_blocks-hero_slideshow_control';
+
+  //generate an id string for the instance of the block
+  const blockID = blockProps.id;
+  console.log("SAVED!");
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      ...wrapperProps,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "jg_blocks-hero_slideshow_controls",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          ...arrowBtnProps,
+          onClick: () => {
+            //go to previous slide
+          },
+          children: "\u2190"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          ...arrowBtnProps,
+          onClick: () => {
+            //go to next slide
+          },
+          children: "\u2192"
+        })]
+      }), attributes?.slides && attributes?.slides?.length > 0 ? attributes?.slides.map((slide, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: `jg_blocks-hero_slideshow_slide`,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+          className: "jg_blocks-hero_slideshow_image",
+          src: slide.url,
+          alt: slide.alt
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "jg_blocks-hero_slideshow_slide_content",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+            tagName: "p",
+            className: "jg_blocks-hero_slideshow_text",
+            children: slide?.content?.caption || "Put a descriptive slide caption here."
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            style: {
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%"
+            },
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+              ...actionBtnProps,
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+                className: "jg_blocks-hero_slideshow_button_text",
+                children: slide?.content?.buttonText || "Go!"
+              })
+            })
+          })]
+        })]
+      }, index)) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        children: "Add Images to the Slide Show"
+      })]
     })
   });
 }
