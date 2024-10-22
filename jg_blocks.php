@@ -17,6 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+// Require Composer's autoload file
+require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
+use jtgraham38\jgwordpressstyle\BlockStyle;
+
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
  * Behind the scenes, it registers also all assets so they can be enqueued
@@ -24,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function init_jg_blocks() {
+function jg_blocks_init() {
 	register_block_type( __DIR__ . '/build/hero-slideshow' );
 }
-add_action( 'init', 'init_jg_blocks' );
+add_action( 'init', 'jg_blocks_init' );

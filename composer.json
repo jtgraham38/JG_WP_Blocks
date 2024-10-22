@@ -1,0 +1,20 @@
+{
+    "name": "jgwebdev/jg_blocks",
+    "description": "Custom Gutenberg Blocks by JG Web Devlopment.",
+    "type": "wordpress-plugin",
+    "authors": [
+        {
+            "name": "JG Web Development",
+            "email": "jacob.t.graham@proton.me"
+        }
+    ],
+    "require": {
+        "jtgraham38/jgwordpressblockstyle": "^0.0.5"
+    },
+    "repositories": [
+    {
+        "type": "composer",
+        "url": "https://php.jacob-t-graham.com"
+    }
+]
+}
