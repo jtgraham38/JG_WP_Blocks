@@ -84,31 +84,80 @@ __webpack_require__.r(__webpack_exports__);
 /* my code */
 
 const {
-  state,
   actions,
   callbacks
 } = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.store)('jg_blocks_hero_slideshow', {
   actions: {
     nextSlide() {
-      console.log('nextSlide');
-      state.currentSlide = (state.currentSlide + 1) % state.slides.length;
+      //got to the next slide
+      const context = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
+      actions.goToSlide(context.currentSlide + 1);
     },
     prevSlide() {
-      console.log('prevSlide');
-      state.currentSlide = (state.currentSlide - 1 + state.slides.length) % state.slides.length;
+      //go to the previous slide
+      const context = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
+      actions.goToSlide(context.currentSlide - 1);
     },
     goToSlide(index) {
-      state.currentSlide = index;
-    },
-    startAutoPlay() {
-      //if state.autoPlay is set, start the interval
-      console.log("setting autoplay interval to ", state.autoPlay);
-      if (state.autoPlay) {
-        state.autoPlayInterval = setInterval(actions.nextSlide, state.autoPlay);
-      }
+      //go to a specific slide (called by nextSlide and prevSlide)
+      const context = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
+      context.prevSlide = context.currentSlide;
+      context.currentSlide = index % context.slides.length < 0 ? context.slides.length - 1 : index % context.slides.length;
+      callbacks.onSlideChange();
     }
   },
-  callbacks: {}
+  callbacks: {
+    init() {
+      callbacks.setRoot();
+      callbacks.startAutoPlay();
+    },
+    startAutoPlay() {
+      //if context.autoPlay is set, start the interval
+      const context = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
+      if (context.autoPlay) {
+        context.autoPlayInterval = setInterval((0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.withScope)(() => {
+          actions.nextSlide();
+        }), context.autoPlay);
+      }
+    },
+    setRoot() {
+      const context = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
+      const el = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getElement)();
+      context.root = el.ref;
+    },
+    onSlideChange() {
+      const context = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
+
+      //clear the interval if it exists
+      if (context.autoPlayInterval) {
+        clearInterval(context.autoPlayInterval);
+      }
+      //start the interval again
+      callbacks.startAutoPlay();
+
+      //hide all the slides that are not the current slide
+      const slideEls = context.root.querySelectorAll('.jg_blocks-hero_slideshow_slide');
+      slideEls.forEach((slide, index) => {
+        if (index == context.currentSlide) {
+          slide.classList.remove('jg_blocks-hidden');
+          slide.classList.add('jg_blocks-hero_slideshow_selected_slide');
+
+          //set the class to animate the new slide, based on whether it is the next or previous slide
+          const isNextSlide = index > context.prevSlide || context.prevSlide == context.slides.length - 1 && index == 0;
+          if (isNextSlide) {
+            slide.classList.add('jg_blocks-hero_slideshow_slide_right');
+          } else {
+            slide.classList.add('jg_blocks-hero_slideshow_slide_left');
+          }
+        } else {
+          slide.classList.add('jg_blocks-hidden');
+          slide.classList.remove('jg_blocks-hero_slideshow_selected_slide');
+          slide.classList.remove('jg_blocks-hero_slideshow_slide_right');
+          slide.classList.remove('jg_blocks-hero_slideshow_slide_left');
+        }
+      });
+    }
+  }
 });
 
 //# sourceMappingURL=view.js.map

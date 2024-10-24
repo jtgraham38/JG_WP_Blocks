@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "jtgraham38/jgwordpressblockstyle": "^0.0.5"
+        "jtgraham38/jgwordpressblockstyle": "^0.0.6"
     },
     "repositories": [
     {

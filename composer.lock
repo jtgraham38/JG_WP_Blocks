@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3c6894d0bd1308ea25c3dc3c2c8fbc6",
+    "content-hash": "b9d492d0d154ee1ad695dbd28932a667",
     "packages": [
         {
             "name": "jtgraham38/jgwordpressblockstyle",
-            "version": "0.0.5",
+            "version": "0.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jtgraham38/JGWPBlockStyles.git",
-                "reference": "87650acffb4d3d1a92ea29d5f6fd022ca33d2396"
+                "reference": "fd5282486c9ea104764e8d09ca4927d5291316bc"
             },
             "dist": {
                 "type": "tar",
-                "url": "http://php.jacob-t-graham.com/dist/jtgraham38/jgwordpressblockstyle/jtgraham38-jgwordpressblockstyle-87650acffb4d3d1a92ea29d5f6fd022ca33d2396-zip-c74383.tar",
-                "reference": "87650acffb4d3d1a92ea29d5f6fd022ca33d2396",
-                "shasum": "518f59cf496fce9f8f578d5cabd366c754c82dc4"
+                "url": "http://php.jacob-t-graham.com/dist/jtgraham38/jgwordpressblockstyle/jtgraham38-jgwordpressblockstyle-fd5282486c9ea104764e8d09ca4927d5291316bc-zip-d588ec.tar",
+                "reference": "fd5282486c9ea104764e8d09ca4927d5291316bc",
+                "shasum": "adc7cf900a1212102e5b39daaadff5ec46bf0fd5"
             },
             "require-dev": {
                 "phpunit/phpunit": "^10.5"
@@ -41,10 +41,10 @@
             ],
             "description": "A set of utility functions for extracting style values from a block's attributes object.",
             "support": {
-                "source": "https://github.com/jtgraham38/JGWPBlockStyles/tree/0.0.5",
+                "source": "https://github.com/jtgraham38/JGWPBlockStyles/tree/0.0.6",
                 "issues": "https://github.com/jtgraham38/JGWPBlockStyles/issues"
             },
-            "time": "2024-10-22T20:48:10+00:00"
+            "time": "2024-10-24T20:17:33+00:00"
         }
     ],
     "packages-dev": [],
