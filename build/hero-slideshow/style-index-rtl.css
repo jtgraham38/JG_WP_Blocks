@@ -29,6 +29,12 @@
   align-self: center;
   font-size: larger;
 }
+.jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_controls .jg_blocks-hero_slideshow_control:hover {
+  transform: scale(0.95);
+}
+.jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_controls .jg_blocks-hero_slideshow_control:active {
+  transform: scale(1.05);
+}
 .jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_controls .jg_blocks-hero_slideshow_action_button {
   cursor: pointer;
   border: none;
@@ -78,6 +84,12 @@
   text-align: center;
   font-size: larger;
   display: inline-block;
+}
+.jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_slide .jg_blocks-hero_slideshow_slide_content .jg_blocks-hero_slideshow_action_button:hover {
+  transform: scale(0.95);
+}
+.jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_slide .jg_blocks-hero_slideshow_slide_content .jg_blocks-hero_slideshow_action_button:active {
+  transform: scale(1.05);
 }
 .jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_slide .jg_blocks-hero_slideshow_slide_content .jg_blocks-hero_slideshow_action_button p {
   margin: 0;

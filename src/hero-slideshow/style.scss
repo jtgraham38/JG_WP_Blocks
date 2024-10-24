@@ -26,6 +26,13 @@
 			padding: 0.5rem;
 			align-self: center;
 			font-size: larger;
+			&:hover {
+				transform: scale(0.95);
+			}
+		
+			&:active {
+				transform: scale(1.05);
+			}
 		}
 	
 		.jg_blocks-hero_slideshow_action_button{
@@ -85,6 +92,14 @@
 			text-align: center;
 			font-size: larger;
 			display: inline-block;
+
+			&:hover{
+				transform: scale(0.95);
+			}
+
+			&:active{
+				transform: scale(1.05);
+			}
 
 			p{
 				margin: 0;
