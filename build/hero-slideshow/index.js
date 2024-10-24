@@ -368,6 +368,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/hero-slideshow/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/hero-slideshow/save.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/hero-slideshow/block.json");
+/* harmony import */ var _jg_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../jg.png */ "./jg.png");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
 /**
  * Registers a new block provided a unique name and an object defining its behavior.
  *
@@ -391,12 +394,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * Every block starts by registering a new block type definition.
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
+
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
+  icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+    src: _jg_png__WEBPACK_IMPORTED_MODULE_5__,
+    alt: "JG Web Development",
+    style: {
+      width: '24px',
+      height: '24px'
+    }
+  }),
   /**
    * @see ./edit.js
    */
@@ -574,6 +587,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./jg.png":
+/*!****************!*\
+  !*** ./jg.png ***!
+  \****************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "images/jg.e85efa25.png";
+
+/***/ }),
+
 /***/ "react/jsx-runtime":
 /*!**********************************!*\
   !*** external "ReactJSXRuntime" ***!
@@ -640,7 +663,7 @@ module.exports = window["wp"]["i18n"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner"],"category":"widgets","icon":"smiley","description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number","default":""},"url":{"type":"string","default":""},"alt":{"type":"string","default":""},"content":{"type":"object","properties":{"caption":{"type":"string","default":""},"buttonText":{"type":"string","default":""}}}}}},"height":{"type":"string","default":"32rem"},"autoPlay":{"type":"number","default":5000},"textColor":{"type":"string","default":"#ffffff"},"fontSize":{"type":"string","default":"x-large"},"style":{"type":"object","default":{"elements":{"button":{"color":{"text":"#ffffff","background":"#000000"}}}}}},"supports":{"html":false,"color":{"text":true,"background":false,"button":true},"typography":{"fontSize":true},"interactivity":true},"textdomain":"jg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScriptModule":"file:./view.js","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner"],"category":"widgets","icon":{"src":"../../jg.png"},"description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number","default":""},"url":{"type":"string","default":""},"alt":{"type":"string","default":""},"content":{"type":"object","properties":{"caption":{"type":"string","default":""},"buttonText":{"type":"string","default":""}}}}}},"height":{"type":"string","default":"32rem"},"autoPlay":{"type":"number","default":5000},"textColor":{"type":"string","default":"#ffffff"},"fontSize":{"type":"string","default":"x-large"},"style":{"type":"object","default":{"elements":{"button":{"color":{"text":"#ffffff","background":"#000000"}}}}}},"supports":{"html":false,"color":{"text":true,"background":false,"button":true},"typography":{"fontSize":true},"interactivity":true},"textdomain":"jg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScriptModule":"file:./view.js","render":"file:./render.php"}');
 
 /***/ })
 
@@ -732,6 +755,18 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -746,6 +781,29 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript && document.currentScript.tagName.toUpperCase() === 'SCRIPT')
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) {
+/******/ 					var i = scripts.length - 1;
+/******/ 					while (i > -1 && (!scriptUrl || !/^http(s?):/.test(scriptUrl))) scriptUrl = scripts[i--].src;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl + "../";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */

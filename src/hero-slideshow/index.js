@@ -20,13 +20,21 @@ import './style.scss';
 import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
+import jgIcon from '../../jg.png';
 
 /**
  * Every block starts by registering a new block type definition.
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType( metadata.name, {
+registerBlockType(metadata.name, {
+	icon: (
+		<img 
+			src={jgIcon}
+			alt="JG Web Development" 
+			style={{ width: '24px', height: '24px' }} 
+		/>
+	),
 	/**
 	 * @see ./edit.js
 	 */

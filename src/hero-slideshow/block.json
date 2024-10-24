@@ -10,7 +10,9 @@
 		"banner"
 	],
 	"category": "widgets",
-	"icon": "smiley",
+	"icon": {
+		"src": "../../jg.png"
+	},
 	"description": "A slideshow to serve as the hero banner element for a site..",
 	"example": {},
 	"attributes": {
