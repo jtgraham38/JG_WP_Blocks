@@ -49,10 +49,12 @@ $actionBtnProps['class'] .= ' jg_blocks-hero_slideshow_action_button wp-element-
 //make the caption props
 $captionProps = array(
     'style' => array(
+        'color' => $style->textColor()->isPreset ? '' : $style->textColor()->value,
         'font-size' => $style->fontSize()->isPreset ? '' : $style->fontSize()->value,
     ),
     'class' => array(
         $style->fontSize()->isPreset ? 'has-font-size has-' . $style->fontSize()->value . '-font-size'  : '',
+        $style->textColor()->isPreset ? 'has-text-color has-' . $style->textColor()->value . '-color' : '',
     )
 );
 $captionProps['style'] = implode('', array_map(function($v, $k) {
