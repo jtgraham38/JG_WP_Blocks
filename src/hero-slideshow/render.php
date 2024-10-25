@@ -14,8 +14,6 @@ use jtgraham38\jgwordpressstyle\BlockStyle;
 //use a style parser to get the button styles
 $style = new BlockStyle($attributes);
 
-
-
 //make button classes and styles
 $btnProps = array(
     'style' => array(
@@ -38,6 +36,7 @@ $btnProps['style'] = implode('', array_map(function($v, $k) {
 }, $btnProps['style'], array_keys($btnProps['style'])));
 //convert the button classes to a string
 $btnProps['class'] = implode(' ', $btnProps['class']);
+$btnProps['class'] .= ' wp-element-button';
 
 //make the arrow button props
 $arrowBtnProps = $btnProps + array();  //copy
@@ -45,7 +44,7 @@ $arrowBtnProps['class'] .= ' jg_blocks-hero_slideshow_control';
 
 //make the action button props
 $actionBtnProps = $btnProps + array();  //copy
-$actionBtnProps['class'] .= ' jg_blocks-hero_slideshow_action_button';
+$actionBtnProps['class'] .= ' jg_blocks-hero_slideshow_action_button wp-element-button';
 
 //make the caption props
 $captionProps = array(
@@ -62,10 +61,6 @@ $captionProps['style'] = implode('', array_map(function($v, $k) {
 }, $captionProps['style'], array_keys($captionProps['style'])));
 $captionProps['class'] = implode(' ', $captionProps['class']);
 $captionProps['class'] .= ' jg_blocks-hero_slideshow_text';
-
-echo "<pre>";
-print_r($attributes);
-echo "</pre>";
 
 ?>
 
@@ -122,15 +117,27 @@ echo "</pre>";
                 </p>
 						
                 
-                <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
-                    <div
-                        class="<?php echo esc_attr( $actionBtnProps['class'] ); ?>"
-                        style="<?php echo esc_attr( $actionBtnProps['style'] ); ?>"
-                    >
-                        <p class="jg_blocks-hero_slideshow_button_text">
-                            <?php echo esc_html( $slide['content']['buttonText'] ?? 'Go!' ); ?>
-                        </p>
-                    </div>
+                <div 
+                    style="display: flex; justify-content: center; align-items: center; width: 100%;"
+                >
+                    <?php if (!empty($slide['content']['buttonText'])): ?>
+                        <button
+                            class="<?php echo esc_attr( $actionBtnProps['class'] ); ?>"
+                            style="<?php echo esc_attr( $actionBtnProps['style'] ); ?>"
+                        >
+                            <p class="jg_blocks-hero_slideshow_button_text">
+                                <?php echo wp_kses( $slide['content']['buttonText'] ?? 'Go!', [
+                                    'a' => [
+                                        'href' => [],
+                                        'target' => [],
+                                        'rel' => [],
+                                    ],
+                                    'strong' => [],
+                                    'em' => [],
+                                ] ); ?>
+                            </p>
+                        </button>
+                    <?php endif; ?>
                 </div>
 
             </div>

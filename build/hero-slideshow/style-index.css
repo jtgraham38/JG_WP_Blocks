@@ -94,6 +94,10 @@
 .jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_slide .jg_blocks-hero_slideshow_slide_content .jg_blocks-hero_slideshow_action_button p {
   margin: 0;
 }
+.jg_blocks-hero_slideshow .jg_blocks-hero_slideshow_slide .jg_blocks-hero_slideshow_slide_content .jg_blocks-hero_slideshow_action_button p a {
+  color: inherit;
+  text-decoration: none;
+}
 
 @keyframes jg_slideshow_slideInRight {
   0% {

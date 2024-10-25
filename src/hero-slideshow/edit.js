@@ -96,7 +96,6 @@ export default function Edit(
 		//if the latter, the media array will contain the new order of slides
 		//if the former, the media array will contain the new slides
 		
-		console.log("NEWMEDIA: ", newMedia);
 		//check if new images were added
 		const oldMediaIDs = attributes?.slides?.map((slide) => slide.id);
 		const newMediaIDs = newMedia.map((slide) => slide.id);
@@ -145,8 +144,6 @@ export default function Edit(
 			//save the ordered slides to the attribute
 			newSlidesAttrValue = orderedSlides;
 		}
-
-		console.log("Ordered slides updated = ", newSlidesAttrValue);
 
 
 		//update the slides attribute
@@ -293,7 +290,7 @@ export default function Edit(
 											<RichText
 												tagName="p"
 												className="jg_blocks-hero_slideshow_button_text"
-												value={ slide?.content?.buttonText || "Go!" }
+												value={ slide?.content?.buttonText }
 												onChange={(value) => {
 													const newSlides = [...attributes.slides];
 													if (!newSlides[selectedSlide].content) {

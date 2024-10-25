@@ -103,6 +103,12 @@
 
 			p{
 				margin: 0;
+				
+				a{
+					color: inherit; // Inherit color from parent
+					text-decoration: none; // Remove underline
+				}
+
 			}
 		}
 	}
