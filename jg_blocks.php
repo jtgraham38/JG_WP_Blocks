@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       JG Blocks
- * Description:       Custom blocks developed for JG Web Development
+ * Description:       Custom blocks developed for JG Web Development.
  * Requires at least: 6.6
  * Requires PHP:      7.2
  * Version:           0.1.0
