@@ -28,7 +28,7 @@ use jtgraham38\jgwordpressstyle\BlockStyle;
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function jg_blocks_init() {
+function jgwebdev_blocks_init() {
 	register_block_type( __DIR__ . '/build/hero-slideshow' );
 }
-add_action( 'init', 'jg_blocks_init' );
+add_action( 'init', 'jgwebdev_blocks_init' );
