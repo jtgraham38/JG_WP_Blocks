@@ -98,8 +98,9 @@ $captionProps['class'] .= ' jg_blocks-hero_slideshow_text';
     </div>
 
     <?php 
-        $loopIndex = 0;
-        foreach ($attributes['slides'] as $slide): 
+        if (!empty($attributes['slides'])):
+            $loopIndex = 0;
+            foreach ($attributes['slides'] as $slide): 
     ?>  
         <div
             class="jg_blocks-hero_slideshow_slide <?php echo $loopIndex != 0 ? esc_attr('jg_blocks-hidden') : '' ?>"
@@ -147,5 +148,10 @@ $captionProps['class'] .= ' jg_blocks-hero_slideshow_text';
     <?php 
     $loopIndex++;
     endforeach; 
+    else:
     ?>
+        <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+            <p>There are no slides to display.</p>
+        </div>
+    <?php endif; ?>
 </div>

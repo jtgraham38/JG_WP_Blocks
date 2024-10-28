@@ -310,7 +310,7 @@ export default function Edit(
 							</div>
 						))
 					) : (
-						<span>Add Images to the Slide Show</span>
+						<span style={{display: "flex", justifyContent: 'center', alignItems: 'center', height: "100%", width: "100%" }}>Add Images to the Slide Show</span>
 					)
 				}
 			</div>

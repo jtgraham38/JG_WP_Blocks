@@ -345,6 +345,13 @@ function Edit({
           })]
         })]
       }, index)) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        style: {
+          display: "flex",
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: "100%",
+          width: "100%"
+        },
         children: "Add Images to the Slide Show"
       })]
     })]
@@ -661,7 +668,7 @@ module.exports = window["wp"]["i18n"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner"],"category":"widgets","icon":{"src":"../../jg.png"},"description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number","default":""},"url":{"type":"string","default":""},"alt":{"type":"string","default":""},"content":{"type":"object","properties":{"caption":{"type":"string","default":""},"buttonText":{"type":"string","default":""}}}}}},"height":{"type":"string","default":"32rem"},"autoPlay":{"type":"number","default":5000},"textColor":{"type":"string","default":"#ffffff"},"fontSize":{"type":"string","default":"x-large"},"style":{"type":"object","default":{"elements":{"button":{"color":{"text":"#ffffff","background":"#000000"}}}}}},"supports":{"html":false,"color":{"text":true,"background":false,"button":true},"typography":{"fontSize":true},"interactivity":true},"textdomain":"jg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScriptModule":"file:./view.js","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jg-blocks/hero-slideshow","version":"0.1.0","title":"Hero Slideshow","keywords":["hero","slideshow","banner","slide","carousel","image","gallery"],"category":"widgets","icon":{"src":"../../jg.png"},"description":"A slideshow to serve as the hero banner element for a site..","example":{},"attributes":{"slides":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number","default":""},"url":{"type":"string","default":""},"alt":{"type":"string","default":""},"content":{"type":"object","properties":{"caption":{"type":"string","default":""},"buttonText":{"type":"string","default":""}}}}}},"height":{"type":"string","default":"32rem"},"autoPlay":{"type":"number","default":5000},"textColor":{"type":"string","default":"#ffffff"},"fontSize":{"type":"string","default":"x-large"},"style":{"type":"object","default":{"elements":{"button":{"color":{"text":"#ffffff","background":"#000000"}}}}}},"supports":{"html":false,"color":{"text":true,"background":false,"button":true},"typography":{"fontSize":true},"interactivity":true},"textdomain":"jg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScriptModule":"file:./view.js","render":"file:./render.php"}');
 
 /***/ })
 
