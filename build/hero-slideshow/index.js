@@ -163,7 +163,7 @@ function Edit({
             slide.content = {};
           }
           console.log(newMedia[index]);
-          slide.content.caption = newMedia[index]?.caption || 'Put a descriptive slide caption here.';
+          slide.content.caption = newMedia[index]?.caption;
         }
       });
 
@@ -304,7 +304,7 @@ function Edit({
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
             tagName: "p",
             className: "jg_blocks-hero_slideshow_text",
-            value: slide?.content?.caption || "Put a descriptive slide caption here.",
+            value: slide?.content?.caption || "",
             onChange: value => {
               const newSlides = [...attributes.slides];
               if (!newSlides[selectedSlide].content) {
@@ -855,7 +855,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkhero_slideshow"] = self["webpackChunkhero_slideshow"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunkjg_blocks"] = self["webpackChunkjg_blocks"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();

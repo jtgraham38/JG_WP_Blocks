@@ -136,7 +136,7 @@ export default function Edit(
 						slide.content = {};
 					}
 					console.log(newMedia[index]);
-					slide.content.caption = newMedia[index]?.caption || 'Put a descriptive slide caption here.';
+					slide.content.caption = newMedia[index]?.caption;
 					
 				}
 			});
@@ -267,11 +267,11 @@ export default function Edit(
 									}
 								</pre> */}
 								<div className='jg_blocks-hero_slideshow_slide_content'>
-						
+
 									<RichText
 										tagName="p"
 										className="jg_blocks-hero_slideshow_text"
-										value={slide?.content?.caption || "Put a descriptive slide caption here."}
+										value={slide?.content?.caption || ""}
 										onChange={(value) => {
 											const newSlides = [...attributes.slides];
 											if (!newSlides[selectedSlide].content) {
@@ -282,6 +282,7 @@ export default function Edit(
 										}}
 										placeholder={__("Put a descriptive slide caption here.", "hero-slideshow")}
 									/>
+						
 
 									<div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
 										<div
