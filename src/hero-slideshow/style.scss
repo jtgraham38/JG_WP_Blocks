@@ -92,44 +92,58 @@
 	}
 
 	.jg_blocks-hero_slideshow_slide_content {
+
 		position: absolute;
 		width: 100%;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%); // Centers the content horizontally and vertically
 		display: flex;
-		flex-direction: column;
 		align-items: center;
+		justify-content: space-between;
 		z-index: 2;
 
-		.jg_blocks-hero_slideshow_action_button{
-			cursor: pointer;
-			border: none;
-			padding: 0.5rem 1rem;
-			align-self: center;
-			text-align: center;
-			font-size: larger;
-			display: inline-block;
-			border-radius: .33rem;
+		.jg_blocks-hero_slideshow_slide_spacer{
+			width: 5rem;
+		}
 
-			&:hover{
-				transform: scale(0.95);
-			}
-
-			&:active{
-				transform: scale(1.05);
-			}
+		.jg_blocks-hero_slideshow_expand{
+			flex: 1;	// This element will expand to fill available space
 
 			p{
-				margin: 0;
-				
-				a{
-					color: inherit; // Inherit color from parent
-					text-decoration: none; // Remove underline
-				}
+				text-align: center;
+			}
 
+			.jg_blocks-hero_slideshow_action_button{
+				cursor: pointer;
+				border: none;
+				padding: 0.5rem 1rem;
+				align-self: center;
+				text-align: center;
+				font-size: larger;
+				display: inline-block;
+				border-radius: .33rem;
+	
+				&:hover{
+					transform: scale(0.95);
+				}
+	
+				&:active{
+					transform: scale(1.05);
+				}
+	
+				p{
+					margin: 0;
+					
+					a{
+						color: inherit; // Inherit color from parent
+						text-decoration: none; // Remove underline
+					}
+	
+				}
 			}
 		}
+
 	}
   }
 }

@@ -111,37 +111,41 @@ $captionProps['class'] .= ' jg_blocks-hero_slideshow_text';
                 alt="<?php echo esc_attr( get_post_meta( $slide['id'], '_wp_attachment_image_alt', true ) ?? $slide['alt'] ); ?>"
             />
             <div class='jg_blocks-hero_slideshow_slide_content'>
+                <div class='jg_blocks-hero_slideshow_slide_spacer'></div>
 
-                <p 
-                    class="<?php echo esc_attr( $captionProps['class'] ); ?>"
-                    style="<?php echo esc_attr( $captionProps['style'] ); ?>"
-                >
-                    <?php echo esc_html( $slide['content']['caption'] ?? 'Put a descriptive slide caption here.' ); ?>
-                </p>
-						
-                
-                <div 
-                    style="display: flex; justify-content: center; align-items: center; width: 100%;"
-                >
-                    <?php if (!empty($slide['content']['buttonText'])): ?>
-                        <button
-                            class="<?php echo esc_attr( $actionBtnProps['class'] ); ?>"
-                            style="<?php echo esc_attr( $actionBtnProps['style'] ); ?>"
-                        >
-                            <p class="jg_blocks-hero_slideshow_button_text">
-                                <?php echo wp_kses( $slide['content']['buttonText'] ?? 'Go!', [
-                                    'a' => [
-                                        'href' => [],
-                                        'target' => [],
-                                        'rel' => [],
-                                    ],
-                                    'strong' => [],
-                                    'em' => [],
-                                ] ); ?>
-                            </p>
-                        </button>
-                    <?php endif; ?>
+                <div class="jg_blocks-hero_slideshow_expand">
+                    <p 
+                        class="<?php echo esc_attr( $captionProps['class'] ); ?>"
+                        style="<?php echo esc_attr( $captionProps['style'] ); ?>"
+                    >
+                        <?php echo esc_html( $slide['content']['caption'] ?? 'Put a descriptive slide caption here.' ); ?>
+                    </p>
+                            
+                    <div 
+                        style="display: flex; justify-content: center; align-items: center; width: 100%;"
+                    >
+                        <?php if (!empty($slide['content']['buttonText'])): ?>
+                            <button
+                                class="<?php echo esc_attr( $actionBtnProps['class'] ); ?>"
+                                style="<?php echo esc_attr( $actionBtnProps['style'] ); ?>"
+                            >
+                                <p class="jg_blocks-hero_slideshow_button_text">
+                                    <?php echo wp_kses( $slide['content']['buttonText'] ?? 'Go!', [
+                                        'a' => [
+                                            'href' => [],
+                                            'target' => [],
+                                            'rel' => [],
+                                        ],
+                                        'strong' => [],
+                                        'em' => [],
+                                    ] ); ?>
+                                </p>
+                            </button>
+                        <?php endif; ?>
+                    </div>
                 </div>
+
+                <div class='jg_blocks-hero_slideshow_slide_spacer'></div>
 
             </div>
         </div>
