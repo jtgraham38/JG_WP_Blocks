@@ -9,12 +9,12 @@
         }
     ],
     "require": {
-        "jtgraham38/jgwordpressblockstyle": "^0.0.7"
+        "jtgraham38/jgwordpressblockstyle": "^0.1.2"
     },
     "repositories": [
-    {
-        "type": "composer",
-        "url": "https://php.jacob-t-graham.com"
-    }
-]
+        {
+            "type": "composer",
+            "url": "https://php.jacob-t-graham.com"
+        }
+    ]
 }
