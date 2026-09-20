@@ -10,7 +10,13 @@ Custom blocks built by JG Web Development
 
 == Description ==
 
-This plugin contains a set of blocks available to JG Web Development Customers.
+This plugin contains a set of custom WordPress blocks developed in-house by JG Web Development. It is part of JG Web Development's ever-growing JG Blocks library, built to level up the UI of WordPress sites.
+
+JG Web Development brings the power of big technology to small businesses and organizations throughout Northeast Ohio and Western Pennsylvania. The team provides end-to-end support—from site development and hosting to maintenance and feature upgrades—and specializes in captivating, user-friendly WordPress websites, custom software, and related services for clients who need more than a simple landing page. Learn more at https://jacob-t-graham.com/jg-web-development.
+
+== Ownership and Use ==
+
+This project is owned by JG Web Development. Ownership of the plugin, its source code, and related assets is not transferred to the client. Clients are licensed to use this plugin on their site.
 
 == Installation ==
 
