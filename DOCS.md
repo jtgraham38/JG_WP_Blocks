@@ -107,3 +107,64 @@ Renders an empty slideshow at the default height (`32rem`) with the default colo
 ```
 [jgwd_slideshow_hero height="24rem" autoPlay="4000" slides='[{"id":123,"content":{"caption":"Spring sale","buttonText":"<a href=\"/shop\">Shop now</a>"}}]']
 ```
+
+## Media Flip Card
+
+**Shortcode:** `[jgwd_media_flip_card]`
+
+**Block:** `jg-blocks/media-flip-card`
+
+A card that shows a full-size image and caption on the front. Hover (desktop) or tap (phone) flips it to reveal nested content such as headings, lists, and paragraphs.
+
+In the block editor, use **Edit Back** in the sidebar to flip the card and add child blocks. The front caption is editable in place.
+
+### Passing parameters
+
+Wrap JSON values in **single quotes**. WordPress lowercases shortcode attribute names, so `mediaId` may also be written as `mediaid` or `id`.
+
+Content between the opening and closing tags becomes the back of the card.
+
+#### Option 1: Entire attributes object
+
+```
+[jgwd_media_flip_card attributes='{"mediaId":123,"caption":"Our studio","height":"20rem"}']
+<h3>About the space</h3>
+<p>Tour the workshop and see current projects.</p>
+[/jgwd_media_flip_card]
+```
+
+From PHP, pass the array and back-face HTML:
+
+```php
+echo jg_blocks_media_flip_card_shortcode( $attributes, $content );
+```
+
+#### Option 2: Individual parameters
+
+```
+[jgwd_media_flip_card mediaId="123" caption="Our studio" height="24rem"]
+<h3>About the space</h3>
+<ul><li>Open weekdays</li><li>Free parking</li></ul>
+[/jgwd_media_flip_card]
+```
+
+### Attribute reference
+
+- **`attributes`** (JSON object, optional) — the entire block attributes array. When this is set, it is merged over the other parameters.
+- **`mediaId`** / **`mediaid`** / **`id`** (number) — WordPress attachment ID for the front image.
+- **`mediaUrl`** / **`mediaurl`** (string) — image URL fallback if no attachment ID is used.
+- **`mediaAlt`** / **`mediaalt`** (string) — alt text. Filled from the attachment when `mediaId` is set.
+- **`caption`** (string) — text overlaid on the front image.
+- **`height`** (string, default `20rem`) — CSS height of the card.
+- **`textColor`** / **`textcolor`** (string) — base text color on the back of the card. Child blocks keep their own colors when set. Hex or a preset slug such as `contrast`.
+- **`backgroundColor`** / **`backgroundcolor`** (string) — background color of the back of the card. Hex or a preset slug.
+- **`borderColor`** / **`bordercolor`** (string) — border color of both faces. Hex or a preset slug.
+- **`style`** (JSON object) — WordPress style object for custom colors and border width/radius/style, for example `{"color":{"background":"#111","text":"#fff"},"border":{"width":"2px","radius":"12px","color":"#000","style":"solid"}}`.
+
+### Minimal example
+
+```
+[jgwd_media_flip_card]
+```
+
+Renders an empty card at the default height. Add an image in the block editor, or pass `mediaId` in the shortcode.

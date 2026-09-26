@@ -1,0 +1,44 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.jg_blocks-inspector_inputs {
+	display: flex;
+	flex-direction: column;
+
+	.jg_blocks-inspector_input_group {
+		margin-bottom: 1rem;
+		padding: 0.5rem 0;
+
+		label {
+			display: block;
+			margin-bottom: 0.5rem;
+		}
+
+		input {
+			width: 100%;
+			padding: 0.5rem;
+			border: 1px solid #ccc;
+			border-radius: 0.25rem;
+		}
+	}
+}
+
+//keep hover from stealing the editor, and let the back face receive clicks
+.jg_blocks-media_flip_card.is-editor {
+	cursor: default;
+
+	.jg_blocks-media_flip_card_back {
+		pointer-events: none;
+	}
+
+	&.is-flipped .jg_blocks-media_flip_card_back {
+		pointer-events: auto;
+	}
+
+	&.is-flipped .jg_blocks-media_flip_card_front {
+		pointer-events: none;
+	}
+}

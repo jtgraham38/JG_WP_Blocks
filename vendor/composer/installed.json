@@ -2,23 +2,23 @@
     "packages": [
         {
             "name": "jtgraham38/jgwordpressblockstyle",
-            "version": "0.1.2",
-            "version_normalized": "0.1.2.0",
+            "version": "0.2.0",
+            "version_normalized": "0.2.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jtgraham38/JGWPBlockStyles.git",
-                "reference": "3173a2b827a88b7736ae93143d5ec80237c9f978"
+                "url": "git@github.com:jtgraham38/JGWPBlockStyles.git",
+                "reference": "8adea31f6588165747134620165090358f8b43ad"
             },
             "dist": {
-                "type": "tar",
-                "url": "http://php.jacob-t-graham.com/dist/jtgraham38/jgwordpressblockstyle/jtgraham38-jgwordpressblockstyle-3173a2b827a88b7736ae93143d5ec80237c9f978-zip-06a1e0.tar",
-                "reference": "3173a2b827a88b7736ae93143d5ec80237c9f978",
-                "shasum": "28513896767b0241abb62e7b23e83e4e416f382e"
+                "type": "zip",
+                "url": "https://php.jacob-t-graham.com/dist/jtgraham38/jgwordpressblockstyle/jtgraham38-jgwordpressblockstyle-8adea31f6588165747134620165090358f8b43ad-zip-dacf70.zip",
+                "reference": "8adea31f6588165747134620165090358f8b43ad",
+                "shasum": "9c9f76773d75c0de1f2037e9f04d6a1002a9d931"
             },
             "require-dev": {
                 "phpunit/phpunit": "^10.5"
             },
-            "time": "2025-05-14T18:58:24+00:00",
+            "time": "2026-09-26T15:00:42+00:00",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -37,10 +37,6 @@
                 }
             ],
             "description": "A set of utility functions for extracting style values from a block's attributes object.",
-            "support": {
-                "source": "https://github.com/jtgraham38/JGWPBlockStyles/tree/0.1.2",
-                "issues": "https://github.com/jtgraham38/JGWPBlockStyles/issues"
-            },
             "install-path": "../jtgraham38/jgwordpressblockstyle"
         }
     ],

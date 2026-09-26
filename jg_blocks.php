@@ -30,8 +30,37 @@ use jtgraham38\jgwordpressstyle\BlockStyle;
  */
 function jgwebdev_blocks_init() {
 	register_block_type( __DIR__ . '/build/hero-slideshow' );
+	register_block_type( __DIR__ . '/build/media-flip-card' );
 }
 add_action( 'init', 'jgwebdev_blocks_init' );
+
+//enable WordPress Styles-tab border controls even when the theme hides them
+function jg_blocks_enable_editor_border_controls( $settings ) {
+	$settings['__experimentalFeatures']['border']['color']  = true;
+	$settings['__experimentalFeatures']['border']['radius'] = true;
+	$settings['__experimentalFeatures']['border']['style']  = true;
+	$settings['__experimentalFeatures']['border']['width']  = true;
+	return $settings;
+}
+add_filter( 'block_editor_settings_all', 'jg_blocks_enable_editor_border_controls' );
+
+//also expose those border tools through theme.json so the Styles tab can read them
+function jg_blocks_enable_theme_json_border( $theme_json ) {
+	return $theme_json->update_with(
+		array(
+			'version'  => 2,
+			'settings' => array(
+				'border' => array(
+					'color'  => true,
+					'radius' => true,
+					'style'  => true,
+					'width'  => true,
+				),
+			),
+		)
+	);
+}
+add_filter( 'wp_theme_json_data_theme', 'jg_blocks_enable_theme_json_border' );
 
 //register shortcode helper used by all shortcode.php files
 if ( ! function_exists( 'register_shortcode' ) ) {
@@ -42,4 +71,5 @@ if ( ! function_exists( 'register_shortcode' ) ) {
 
 //load shortcodes
 require_once __DIR__ . '/shortcodes/slideshow_hero/shortcode.php';
+require_once __DIR__ . '/shortcodes/media_flip_card/shortcode.php';
 
