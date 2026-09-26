@@ -1,0 +1,105 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jg-blocks/before-after-slider",
+  "version": "0.1.0",
+  "title": "Before/After Slider",
+  "keywords": [
+    "before",
+    "after",
+    "compare",
+    "slider",
+    "image",
+    "contrast"
+  ],
+  "category": "widgets",
+  "icon": {
+    "src": "../../jg.png"
+  },
+  "description": "Compare two images with a draggable slider. Drag left to show the first image, right to show the second.",
+  "example": {},
+  "attributes": {
+    "beforeId": {
+      "type": "number",
+      "default": 0
+    },
+    "beforeUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "beforeAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "afterId": {
+      "type": "number",
+      "default": 0
+    },
+    "afterUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "afterAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "sliderPosition": {
+      "type": "number",
+      "default": 50
+    },
+    "height": {
+      "type": "string",
+      "default": "24rem"
+    },
+    "borderColor": {
+      "type": "string"
+    },
+    "style": {
+      "type": "object"
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "color": {
+      "background": true,
+      "text": true,
+      "__experimentalSkipSerialization": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "width": true,
+      "style": true,
+      "__experimentalSkipSerialization": true,
+      "__experimentalDefaultControls": {
+        "color": true,
+        "radius": true,
+        "width": true,
+        "style": true
+      }
+    },
+    "border": {
+      "color": true,
+      "radius": true,
+      "width": true,
+      "style": true,
+      "__experimentalSkipSerialization": true,
+      "__experimentalDefaultControls": {
+        "color": true,
+        "radius": true,
+        "width": true,
+        "style": true
+      }
+    }
+  },
+  "textdomain": "jg-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

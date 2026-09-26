@@ -5,4 +5,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 //render this block through the shared shortcode
-echo jg_blocks_slideshow_hero_shortcode( $attributes );
+echo jg_blocks_before_after_slider_shortcode( $attributes );

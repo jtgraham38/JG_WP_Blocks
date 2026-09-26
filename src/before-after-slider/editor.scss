@@ -1,0 +1,32 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.jg_blocks-inspector_inputs {
+	display: flex;
+	flex-direction: column;
+
+	.jg_blocks-inspector_input_group {
+		margin-bottom: 1rem;
+		padding: 0.5rem 0;
+
+		label {
+			display: block;
+			margin-bottom: 0.5rem;
+		}
+
+		input {
+			width: 100%;
+			padding: 0.5rem;
+			border: 1px solid #ccc;
+			border-radius: 0.25rem;
+		}
+	}
+}
+
+//keep Gutenberg selection usable while still previewing the slider
+.jg_blocks-before_after_slider.is-editor {
+	cursor: default;
+}

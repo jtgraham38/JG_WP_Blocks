@@ -168,3 +168,66 @@ echo jg_blocks_media_flip_card_shortcode( $attributes, $content );
 ```
 
 Renders an empty card at the default height. Add an image in the block editor, or pass `mediaId` in the shortcode.
+
+## Before/After Slider
+
+**Shortcode:** `[jgwd_before_after_slider]`
+
+**Block:** `jg-blocks/before-after-slider`
+
+Compares two images with a draggable divider. Drag all the way left to show the first image, or all the way right to show the second. Visitors can drag, tap, or use the keyboard to move the slider. The starting position is set in the editor or shortcode.
+
+Background color fills the slider button. Text color tints the handle icon. Border color applies to the frame border and the divider line.
+
+### Passing parameters
+
+Wrap JSON values in **single quotes**. WordPress lowercases shortcode attribute names, so `beforeId` may also be written as `beforeid`, and `sliderPosition` as `sliderposition` or `position`.
+
+#### Option 1: Entire attributes object
+
+```
+[jgwd_before_after_slider attributes='{"beforeId":123,"afterId":456,"sliderPosition":40,"height":"24rem"}']
+```
+
+From PHP, pass the array directly:
+
+```php
+echo jg_blocks_before_after_slider_shortcode( $attributes );
+```
+
+#### Option 2: Individual parameters
+
+```
+[jgwd_before_after_slider beforeId="123" afterId="456" sliderPosition="40" height="28rem"]
+```
+
+### Attribute reference
+
+- **`attributes`** (JSON object, optional) — the entire block attributes array. When this is set, it is merged over the other parameters.
+- **`beforeId`** / **`beforeid`** (number) — WordPress attachment ID for the first image (shown when the slider is on the left).
+- **`beforeUrl`** / **`beforeurl`** (string) — first-image URL fallback if no attachment ID is used.
+- **`beforeAlt`** / **`beforealt`** (string) — alt text for the first image. Filled from the attachment when `beforeId` is set.
+- **`afterId`** / **`afterid`** (number) — WordPress attachment ID for the second image (shown when the slider is on the right).
+- **`afterUrl`** / **`afterurl`** (string) — second-image URL fallback if no attachment ID is used.
+- **`afterAlt`** / **`afteralt`** (string) — alt text for the second image. Filled from the attachment when `afterId` is set.
+- **`sliderPosition`** / **`sliderposition`** / **`position`** (number, default `50`) — starting slider position from `0` (first image) to `100` (second image).
+- **`height`** (string, default `24rem`) — CSS height of the comparison frame.
+- **`textColor`** / **`textcolor`** (string) — color of the slider handle icon. Hex or a preset slug such as `contrast`.
+- **`backgroundColor`** / **`backgroundcolor`** (string) — background color of the slider button. Hex or a preset slug.
+- **`borderColor`** / **`bordercolor`** (string) — color of the frame border and divider line. Hex or a preset slug.
+- **`style`** (JSON object) — WordPress style object for colors and border width/radius/style, for example `{"color":{"background":"#111","text":"#fff"},"border":{"width":"2px","radius":"12px","color":"#000","style":"solid"}}`.
+
+### Minimal example
+
+```
+[jgwd_before_after_slider]
+```
+
+Renders an empty comparison frame at the default height. Add both images in the block editor, or pass `beforeId` and `afterId` in the shortcode.
+
+### Example with two images
+
+```
+[jgwd_before_after_slider beforeId="123" afterId="456" sliderPosition="35" height="28rem"]
+```
+

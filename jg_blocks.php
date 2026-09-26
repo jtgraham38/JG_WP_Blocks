@@ -31,6 +31,7 @@ use jtgraham38\jgwordpressstyle\BlockStyle;
 function jgwebdev_blocks_init() {
 	register_block_type( __DIR__ . '/build/hero-slideshow' );
 	register_block_type( __DIR__ . '/build/media-flip-card' );
+	register_block_type( __DIR__ . '/build/before-after-slider' );
 }
 add_action( 'init', 'jgwebdev_blocks_init' );
 
@@ -72,4 +73,5 @@ if ( ! function_exists( 'register_shortcode' ) ) {
 //load shortcodes
 require_once __DIR__ . '/shortcodes/slideshow_hero/shortcode.php';
 require_once __DIR__ . '/shortcodes/media_flip_card/shortcode.php';
+require_once __DIR__ . '/shortcodes/before_after_slider/shortcode.php';
 

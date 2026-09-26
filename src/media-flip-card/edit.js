@@ -149,20 +149,6 @@ export default function Edit(
 							</MediaUploadCheck>
 						</div>
 						<div className="jg_blocks-inspector_input_group">
-							<label htmlFor={"jg_blocks-media_flip_card_height_" + blockID} >Height</label>
-							<input
-								id={ "jg_blocks-media_flip_card_height_" + blockID }
-								type="range"
-								min={12}
-								max={48}
-								value={parseInt(attributes?.height, 10) || 20}
-								onChange={(event) => {
-									setAttributes({ height: event.target.value.toString() + "rem" });
-								}}
-							/>
-							<div style={{textAlign: "center"}}>{attributes?.height?.toString() || "20rem"}</div>
-						</div>
-						<div className="jg_blocks-inspector_input_group">
 							<Button
 								variant="secondary"
 								onClick={() => setIsFlipped(!isFlipped)}
