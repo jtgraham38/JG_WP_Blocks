@@ -32,6 +32,7 @@ function jgwebdev_blocks_init() {
 	register_block_type( __DIR__ . '/build/hero-slideshow' );
 	register_block_type( __DIR__ . '/build/media-flip-card' );
 	register_block_type( __DIR__ . '/build/before-after-slider' );
+	register_block_type( __DIR__ . '/build/responsive-display' );
 }
 add_action( 'init', 'jgwebdev_blocks_init' );
 
@@ -41,6 +42,8 @@ function jg_blocks_enable_editor_border_controls( $settings ) {
 	$settings['__experimentalFeatures']['border']['radius'] = true;
 	$settings['__experimentalFeatures']['border']['style']  = true;
 	$settings['__experimentalFeatures']['border']['width']  = true;
+	$settings['__experimentalFeatures']['spacing']['padding'] = true;
+	$settings['__experimentalFeatures']['spacing']['margin']  = true;
 	return $settings;
 }
 add_filter( 'block_editor_settings_all', 'jg_blocks_enable_editor_border_controls' );
@@ -56,6 +59,10 @@ function jg_blocks_enable_theme_json_border( $theme_json ) {
 					'radius' => true,
 					'style'  => true,
 					'width'  => true,
+				),
+				'spacing' => array(
+					'padding' => true,
+					'margin'  => true,
 				),
 			),
 		)
@@ -74,4 +81,5 @@ if ( ! function_exists( 'register_shortcode' ) ) {
 require_once __DIR__ . '/shortcodes/slideshow_hero/shortcode.php';
 require_once __DIR__ . '/shortcodes/media_flip_card/shortcode.php';
 require_once __DIR__ . '/shortcodes/before_after_slider/shortcode.php';
+require_once __DIR__ . '/shortcodes/responsive_display/shortcode.php';
 

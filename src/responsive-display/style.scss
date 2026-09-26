@@ -1,0 +1,22 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ */
+
+.jg_blocks-responsive_display {
+	width: 100%;
+	max-width: 100%;
+
+	//use the match/unmatch classnames to show one inner area and hide the other
+	&:not(.is-editor)[class*="jg_blocks-responsive_display_match-"] {
+		.jg_blocks-responsive_display_above {
+			display: none;
+		}
+	}
+
+	&:not(.is-editor)[class*="jg_blocks-responsive_display_unmatch-"] {
+		.jg_blocks-responsive_display_below {
+			display: none;
+		}
+	}
+}

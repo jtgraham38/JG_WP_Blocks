@@ -231,3 +231,46 @@ Renders an empty comparison frame at the default height. Add both images in the 
 [jgwd_before_after_slider beforeId="123" afterId="456" sliderPosition="35" height="28rem"]
 ```
 
+## Responsive Display
+
+**Shortcode:** `[jgwd_responsive_display]`
+
+**Block:** `jg-blocks/responsive-display`
+
+Wraps two inner content areas and runs a media query in the browser. When the query matches, the wrapper gets a **match** class and the **below** area is shown. When it does not, the wrapper gets an **unmatch** class and the **above** area is shown. The two style boxes in the inspector still write extra CSS that targets those match/unmatch classes.
+
+### Passing parameters
+
+Wrap CSS and JSON values in **single quotes**. WordPress lowercases shortcode attribute names.
+
+Content between the opening and closing tags is the inner content.
+
+```
+[jgwd_responsive_display mediaQuery="(max-width: 768px)" matchStyles="display: block;" unmatchStyles="display: none;"]
+<p>Visible on small screens only.</p>
+[/jgwd_responsive_display]
+```
+
+From PHP:
+
+```php
+echo jg_blocks_responsive_display_shortcode( $attributes, $content );
+```
+
+### Attribute reference
+
+- **`attributes`** (JSON object, optional) — the entire block attributes array.
+- **`mediaQuery`** / **`mediaquery`** / **`query`** (string, default `(max-width: 768px)`) — the media query passed to `window.matchMedia`. You can omit `@media`.
+- **`matchStyles`** / **`matchstyles`** (string) — CSS declarations applied to the match class when the query is true.
+- **`unmatchStyles`** / **`unmatchstyles`** (string) — CSS declarations applied to the unmatch class when the query is false.
+- **`instanceId`** / **`instanceid`** (string, optional) — suffix for the generated class names. The block editor sets this automatically.
+
+### Class names
+
+For instance id `abc123`:
+
+- Match: `.jg_blocks-responsive_display_match-abc123` — shows `.jg_blocks-responsive_display_below`
+- Unmatch: `.jg_blocks-responsive_display_unmatch-abc123` — shows `.jg_blocks-responsive_display_above`
+
+Write extra declarations only, for example `opacity: 1;`. Show/hide of the two content areas is already handled by those class names.
+

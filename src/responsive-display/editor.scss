@@ -1,0 +1,76 @@
+/**
+ * The following styles get applied inside the editor only.
+ */
+
+.jg_blocks-inspector_inputs {
+	display: flex;
+	flex-direction: column;
+
+	.jg_blocks-inspector_input_group {
+		margin-bottom: 1rem;
+		padding: 0.5rem 0;
+
+		label {
+			display: block;
+			margin-bottom: 0.5rem;
+		}
+
+		small {
+			display: block;
+			margin-bottom: 0.5rem;
+		}
+
+		input,
+		textarea {
+			width: 100%;
+			padding: 0.5rem;
+			border: 1px solid #ccc;
+			border-radius: 0.25rem;
+			font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		}
+
+		textarea {
+			min-height: 8rem;
+			resize: vertical;
+		}
+	}
+}
+
+//sidebar switch shows one inner area at a time
+.jg_blocks-responsive_display.is-editor {
+	.jg_blocks-responsive_display_below,
+	.jg_blocks-responsive_display_above {
+		outline: 1px dashed #ccc;
+	}
+
+	.jg_blocks-responsive_display_above {
+		display: none;
+	}
+
+	&.is-editing-above {
+		.jg_blocks-responsive_display_below {
+			display: none;
+		}
+
+		.jg_blocks-responsive_display_above {
+			display: block;
+		}
+	}
+
+	.jg_blocks-responsive_display_below::before,
+	.jg_blocks-responsive_display_above::before {
+		display: block;
+		margin-bottom: 0.5rem;
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: #666;
+	}
+
+	.jg_blocks-responsive_display_below::before {
+		content: "Below query (shown when the query matches)";
+	}
+
+	.jg_blocks-responsive_display_above::before {
+		content: "Above query (shown when the query does not match)";
+	}
+}

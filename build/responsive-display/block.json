@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jg-blocks/responsive-display",
+  "version": "0.1.0",
+  "title": "Responsive Display",
+  "keywords": [
+    "responsive",
+    "media query",
+    "show",
+    "hide",
+    "breakpoint"
+  ],
+  "category": "widgets",
+  "icon": {
+    "src": "../../jg.png"
+  },
+  "description": "Wraps child blocks and applies one class when a media query matches, and another when it does not.",
+  "example": {},
+  "attributes": {
+    "instanceId": {
+      "type": "string",
+      "default": ""
+    },
+    "mediaQuery": {
+      "type": "string",
+      "default": "(max-width: 768px)"
+    },
+    "matchStyles": {
+      "type": "string",
+      "default": ""
+    },
+    "unmatchStyles": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "textdomain": "jg-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}
