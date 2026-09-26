@@ -45,7 +45,11 @@ export default function Edit(
 	//get all the non-style related block props for the wrapper
 	const wrapperProps = {...blockProps};
 	wrapperProps.className += ' jg_blocks-hero_slideshow';
-	wrapperProps.style.height = attributes?.height || '32rem';
+	//useBlockProps() may not include a style object
+	wrapperProps.style = {
+		...(wrapperProps.style || {}),
+		height: attributes?.height || '32rem',
+	};
 
 	//extract button styles
 	const buttonBg = attributes?.style?.elements?.button?.color.background || '#000000';
@@ -91,60 +95,36 @@ export default function Edit(
 
 	// function to handle the media selection
 	const onSelectMedia = (newMedia) => {
+		// gallery MediaUpload always returns the full current selection in order
+		const mediaItems = Array.isArray(newMedia) ? newMedia : [newMedia];
+		const existingSlides = attributes?.slides || [];
 
-		//determine if new images were added, or if an order edit or delete occurred
-		//if the latter, the media array will contain the new order of slides
-		//if the former, the media array will contain the new slides
-		
-		//check if new images were added
-		const oldMediaIDs = attributes?.slides?.map((slide) => slide.id);
-		const newMediaIDs = newMedia.map((slide) => slide.id);
-
-		//if there is anything in newMediaIDs that is not in oldMediaIDs, then a CREATION of new slides occurred
-		const newSlides = newMediaIDs.filter((id) => !oldMediaIDs.includes(id));
-		let newSlidesAttrValue = [];
-		if (newSlides.length > 0) {
-			console.log("new slides added: ", newSlides);
-			
-			//add the new slides to the existing slides
-			//preserve the existing slides
-			const slides = [...attributes?.slides];
-			newMedia.map((media) => {
-				media = {
-					id: media.id,
+		// rebuild slides from that selection, keeping captions/buttons already set
+		const newSlidesAttrValue = mediaItems.map((media) => {
+			const existing = existingSlides.find((slide) => slide.id == media.id);
+			if (existing) {
+				return {
+					...existing,
 					url: media.url,
 					alt: media.alt,
 				};
-				slides.push(media);
-			});
-			
-			//save the new slides to the attribute
-			newSlidesAttrValue = slides;
+			}
+
+			return {
+				id: media.id,
+				url: media.url,
+				alt: media.alt,
+				content: {
+					caption: media.caption || '',
+					buttonText: '',
+				},
+			};
+		});
+
+		// keep the editor on a valid slide after removals
+		if (selectedSlide >= newSlidesAttrValue.length) {
+			setSelectedSlide(Math.max(0, newSlidesAttrValue.length - 1));
 		}
-		//otherwise, either an ORDER EDIT or a DELETION of existing slides occurred
-		else {
-			//remove any slides that were deleted (slides in oldMediaIDs that are not in newMediaIDs)
-			const nonDeletedSlides = attributes?.slides?.filter((slide) => newMediaIDs.includes(slide.id));
-
-			//order nondeleted slides based on the order of newMediaIDs
-			const orderedSlides = newMediaIDs.map((id) => nonDeletedSlides.find((slide) => slide.id == id));
-
-			//apply the captions from the selector to the caption field of the slides
-			orderedSlides.map((slide, index) => {
-				if (newMedia[index].caption) {
-					if (!slide?.content) {
-						slide.content = {};
-					}
-					console.log(newMedia[index]);
-					slide.content.caption = newMedia[index]?.caption;
-					
-				}
-			});
-
-			//save the ordered slides to the attribute
-			newSlidesAttrValue = orderedSlides;
-		}
-
 
 		//update the slides attribute
 		setAttributes({
@@ -267,45 +247,50 @@ export default function Edit(
 									}
 								</pre> */}
 								<div className='jg_blocks-hero_slideshow_slide_content'>
+									<div className='jg_blocks-hero_slideshow_slide_spacer'></div>
 
-									<RichText
-										tagName="p"
-										className="jg_blocks-hero_slideshow_text"
-										value={slide?.content?.caption || ""}
-										onChange={(value) => {
-											const newSlides = [...attributes.slides];
-											if (!newSlides[selectedSlide].content) {
-												newSlides[selectedSlide].content = {};
-											}
-											newSlides[selectedSlide].content.caption = value;
-											setAttributes({ slides: newSlides });
-										}}
-										placeholder={__("Put a descriptive slide caption here.", "hero-slideshow")}
-									/>
-						
+									{/* stack caption above the action button, matching the frontend */}
+									<div className="jg_blocks-hero_slideshow_expand">
+										<RichText
+											tagName="p"
+											className="jg_blocks-hero_slideshow_text"
+											value={slide?.content?.caption || ""}
+											onChange={(value) => {
+												const newSlides = [...attributes.slides];
+												if (!newSlides[selectedSlide].content) {
+													newSlides[selectedSlide].content = {};
+												}
+												newSlides[selectedSlide].content.caption = value;
+												setAttributes({ slides: newSlides });
+											}}
+											placeholder={__("Put a descriptive slide caption here.", "hero-slideshow")}
+										/>
+							
 
-									<div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-										<div
-											{ ...actionBtnProps }
-										>
-											<RichText
-												tagName="p"
-												className="jg_blocks-hero_slideshow_button_text"
-												value={ slide?.content?.buttonText }
-												onChange={(value) => {
-													const newSlides = [...attributes.slides];
-													if (!newSlides[selectedSlide].content) {
-														newSlides[selectedSlide].content = {};
-													}
-													newSlides[selectedSlide].content.buttonText = value;
-													setAttributes({ slides: newSlides });
-												}}
-												placeholder={__("Put a button caption here.", "hero-slideshow-button")}
-											/>
-											
+										<div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+											<div
+												{ ...actionBtnProps }
+											>
+												<RichText
+													tagName="p"
+													className="jg_blocks-hero_slideshow_button_text"
+													value={ slide?.content?.buttonText }
+													onChange={(value) => {
+														const newSlides = [...attributes.slides];
+														if (!newSlides[selectedSlide].content) {
+															newSlides[selectedSlide].content = {};
+														}
+														newSlides[selectedSlide].content.buttonText = value;
+														setAttributes({ slides: newSlides });
+													}}
+													placeholder={__("Put a button caption here.", "hero-slideshow-button")}
+												/>
+												
+											</div>
 										</div>
 									</div>
 
+									<div className='jg_blocks-hero_slideshow_slide_spacer'></div>
 								</div>
 							</div>
 						))

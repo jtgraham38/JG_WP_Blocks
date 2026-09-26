@@ -25,7 +25,11 @@ export default function save(
 	//get all the non-style related block props for the wrapper
 	const wrapperProps = {...blockProps};
 	wrapperProps.className += ' jg_blocks-hero_slideshow';
-	wrapperProps.style.height = attributes?.height || '32rem';
+	//useBlockProps.save() may not include a style object
+	wrapperProps.style = {
+		...(wrapperProps.style || {}),
+		height: attributes?.height || '32rem',
+	};
 
 	//extract button styles
 	const buttonBg = attributes?.style?.elements?.button?.color.background || '#000000';

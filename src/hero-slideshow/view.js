@@ -30,24 +30,30 @@ const { actions, callbacks } = store('jg_blocks_hero_slideshow', {
         nextSlide() {
             //got to the next slide
             const context = getContext();
+            context.direction = 'next';
             actions.goToSlide(context.currentSlide + 1);
         },
         prevSlide() {
             //go to the previous slide
             const context = getContext();
+            context.direction = 'prev';
             actions.goToSlide(context.currentSlide - 1);
         },
         goToSlide(index) {
             //go to a specific slide (called by nextSlide and prevSlide)
             const context = getContext();
+            const slideCount = context.slides?.length || 0;
+            if (!slideCount) {
+                return;
+            }
+
             context.prevSlide = context.currentSlide;
-            context.currentSlide = index % context.slides.length < 0 ? context.slides.length - 1 : index % context.slides.length;
+            context.currentSlide = ((index % slideCount) + slideCount) % slideCount;
             callbacks.onSlideChange();
         }
     },
     callbacks: {
         init() {
-            callbacks.setRoot();
             callbacks.startAutoPlay();
         },
         startAutoPlay() {
@@ -59,13 +65,13 @@ const { actions, callbacks } = store('jg_blocks_hero_slideshow', {
                 } ), context.autoPlay);
             }
         },
-        setRoot() {
-            const context = getContext();
-            const el = getElement();
-            context.root = el.ref;
-        },
         onSlideChange() {
             const context = getContext();
+            const { ref } = getElement();
+            const root = ref?.closest?.('.jg_blocks-hero_slideshow');
+            if (!root) {
+                return;
+            }
 
             //clear the interval if it exists
             if (context.autoPlayInterval) {
@@ -74,29 +80,47 @@ const { actions, callbacks } = store('jg_blocks_hero_slideshow', {
             //start the interval again
             callbacks.startAutoPlay();
 
-            //hide all the slides that are not the current slide
-            const slideEls = context.root.querySelectorAll('.jg_blocks-hero_slideshow_slide');
+            //reveal the new current slide
+            const slideEls = root.querySelectorAll('.jg_blocks-hero_slideshow_slide');
             slideEls.forEach((slide, index) => {
+                //if the current slide is found, animate it in
                 if (index == context.currentSlide) {
                     slide.classList.remove('jg_blocks-hidden');
+                    slide.classList.remove('jg_blocks-hero_slideshow_slide_right');
+                    slide.classList.remove('jg_blocks-hero_slideshow_slide_left');
                     slide.classList.add('jg_blocks-hero_slideshow_selected_slide');
 
-                    //set the class to animate the new slide, based on whether it is the next or previous slide
-                    const isNextSlide = index > context.prevSlide || (context.prevSlide == context.slides.length - 1 && index == 0);
-                    if (isNextSlide) {
-                        slide.classList.add('jg_blocks-hero_slideshow_slide_right');
+                    // force a reflow so the incoming animation can replay
+                    void slide.offsetWidth;
+
+                    //set the class to animate the new slide, based on the last control used
+                    if (context.direction == 'prev') {
+                        slide.classList.add('jg_blocks-hero_slideshow_slide_left');
                     }
                     else {
-                        slide.classList.add('jg_blocks-hero_slideshow_slide_left');
+                        slide.classList.add('jg_blocks-hero_slideshow_slide_right');
                     }
                 }
                 else {
+                    slide.classList.add('jg_blocks-hiding');
+                }
+            });
+
+            //hide all the other slides (do it separately to animate the new one in over the old one)
+            //wait 500ms to do this
+            setTimeout(() => {
+            slideEls.forEach((slide, index) => {
+                //if the current slide is found, animate it in
+                if (index !== context.currentSlide) {
+                    //hide the slide
                     slide.classList.add('jg_blocks-hidden');
                     slide.classList.remove('jg_blocks-hero_slideshow_selected_slide');
                     slide.classList.remove('jg_blocks-hero_slideshow_slide_right');
-                    slide.classList.remove('jg_blocks-hero_slideshow_slide_left');
-                }
-            });
+                        slide.classList.remove('jg_blocks-hero_slideshow_slide_left');
+                    }
+                    slide.classList.remove('jg_blocks-hiding');
+                });
+            }, 500);
 
         }
     }

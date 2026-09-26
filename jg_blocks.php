@@ -32,3 +32,14 @@ function jgwebdev_blocks_init() {
 	register_block_type( __DIR__ . '/build/hero-slideshow' );
 }
 add_action( 'init', 'jgwebdev_blocks_init' );
+
+//register shortcode helper used by all shortcode.php files
+if ( ! function_exists( 'register_shortcode' ) ) {
+	function register_shortcode( $tag, $callback ) {
+		add_shortcode( 'jgwd_' . $tag, $callback );
+	}
+}
+
+//load shortcodes
+require_once __DIR__ . '/shortcodes/slideshow_hero/shortcode.php';
+
